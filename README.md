@@ -7,7 +7,7 @@
 * FakeNewsNet
 * Fake and Real News Dataset
 * LIAR
-* 20News
+* [20News](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_20newsgroups.html)
 * AGNews
 * Yahoo!Answer 
 * Tweet Eval : Emotion detection
@@ -18,5 +18,5 @@
 * Yelp polarity
 * Tweet Eval : Irony detection
 * SemEval 2018 Task 3
-* SARC
+* [SARC](https://nlp.cs.princeton.edu/SARC/1.0/)
 
