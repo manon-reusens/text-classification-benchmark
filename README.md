@@ -1,7 +1,6 @@
 # Experimental evaluation of the state-of-the-art in text classification
 
 ## TO DO 
-- Remove mentions and hashtags in tweets? (no just te symbol)
 - which text content to keep (title as well?)
 - some datasets already have a train-val-test split, others don't 
 - check the running time of the preprocessing
@@ -23,4 +22,3 @@
 * [Tweet Eval : Irony detection](https://github.com/cardiffnlp/tweeteval)
 * [SemEval 2018 Task 3](https://github.com/Cyvhee/SemEval2018-Task3)
 * [SARC](https://nlp.cs.princeton.edu/SARC/1.0/)
-
