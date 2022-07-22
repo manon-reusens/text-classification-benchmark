@@ -1,7 +1,7 @@
 # Experimental evaluation of the state-of-the-art in text classification
 
 ## TO DO 
-- Remove mentions and hashtags in tweets? 
+- Remove mentions and hashtags in tweets? (no just te symbol)
 - which text content to keep (title as well?)
 - some datasets already have a train-val-test split, others don't 
 - check the running time of the preprocessing
