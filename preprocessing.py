@@ -17,19 +17,23 @@ download('omw-1.4')
 class Preprocessor:
 
     def __init__(self,
-                 is_tweet = False,
+                 is_tweet=False,
                  lemmatizer = WordNetLemmatizer(),
                  stopwords = stopwords.words('english'),
                  emojis = emoji.UNICODE_EMOJI_ENGLISH):
-        
+
         self.is_tweet = is_tweet
         self.lemmatizer = lemmatizer
         self.stopwords = stopwords
         self.emojis = emojis
+    
+    def remove_unicode(self,text):
+        #Remove unicode characters from text
+        return text.encode('ascii','ignore').decode()
 
     def remove_punct(self,text):
         #Remove punctuation from string text
-        punctuation = "!\"$%&'()*+,-?—.../:;<=>[\]^_`{|}~“”‘’•°#@"
+        punctuation = "!\"$%&'()*+,-?.../:;<=>[\]^_`{|}~#@"
         text = ''.join(char for char in text if char not in punctuation)
         return text
 
@@ -45,15 +49,14 @@ class Preprocessor:
     #     return text
     
     def remove_repeated_letters(self, text):
-        #If the same letters appears consecutively 3 times or more, reduce it to 1 occurence
+        #If the same letters appears consecutively 3 times or more, reduce it to 1 occurence  (WIP implementation)
         text = re.compile(r'(.)\1{2,}', re.IGNORECASE).sub(r'\1',text)
         return text
 
     def tokenize(self,text):
         #Tokenize the text
         if self.is_tweet:
-            tt = TweetTokenizer()
-            return tt.tokenize(text)
+            return TweetTokenizer().tokenize(text)
         else:
             return word_tokenize(text)
 
@@ -64,14 +67,15 @@ class Preprocessor:
         return text
 
     def drop_emojis(self,text):
-        #Remove emojis from tokenized text
-        text = [word for word in text if word not in self.emojis]
+        #Remove (sequence of) emojis from tokenized text
+        text = [word for word in text if word[0] not in self.emojis] #If there is more than one emoji in the word token, just check the first one
         return text
         
     def drop_stopwords(self,text):
         #Remove stopwords from tokenized text
         text = [word for word in text if word not in self.stopwords]
         return text
+
     def drop_urls(self,text):
         #Remove urls from tokenized text
         text = [word for word in text if 'http' not in word]
@@ -86,6 +90,7 @@ class Preprocessor:
         #Full preprocessing pipeline for a corpus
         start_time = time()
         corpus = df['text'].fillna('').str.lower().to_list()
+        corpus = [self.remove_unicode(text) for text in corpus]
         corpus = [self.remove_punct(text) for text in corpus]
         corpus = [self.remove_repeated_letters(text) for text in corpus]
         corpus = [self.tokenize(text) for text in corpus]
@@ -94,6 +99,7 @@ class Preprocessor:
         corpus = [self.drop_emojis(text) for text in corpus]
         corpus = [self.drop_urls(text) for text in corpus]
         corpus = [self.lemmatize(text) for text in corpus]
+        corpus = [' '.join(text) for text in corpus]
         
         print('%s rows preprocessed in %s seconds'%(df.shape[0],time()-start_time))
         return corpus

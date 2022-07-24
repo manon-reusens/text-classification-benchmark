@@ -8,13 +8,17 @@ from sklearn.datasets import fetch_20newsgroups
 
 class DataLoader:
 
-    #Returns a dictionnary with keys to all the dataframes
     def __init__(self,
                  subset=['fake_news','topic','emotion','polarity','sarcasm']):
+        '''
+        Loads all required datasets as pandas dataframes.
+        Output : a dictionary with the name of the dataset as key and the corresponding dataframe as value.
+        '''
         self.subset = subset
 
 
     def retrieve_text_path(self,path):
+        #Auxiliary function to load the FakeNewsNet data from the json subfolders
         text = []
         for folder in tqdm(os.listdir(path)):
             if os.path.exists(path+folder+"/news content.json"):
@@ -36,13 +40,20 @@ class DataLoader:
             real_news['label'] = np.full(shape=(real_news.shape[0],1),fill_value=1)
             fake_news['label'] = np.zeros(shape=(fake_news.shape[0],1))
             dataset_dict['fake_real_news'] = pd.concat([real_news,fake_news])
-            #FakeNewsNet
+            #FakeNewsNet Politifact
             real_path = "FakeNewsNet/code/fakenewsnet_dataset/politifact/real/"
             fake_path = "FakeNewsNet/code/fakenewsnet_dataset/politifact/fake/"
             real_text = self.retrieve_text_path(real_path)
             fake_text = self.retrieve_text_path(fake_path)    
             label = [1] * len(real_text) + [0] * len(fake_text)        
             dataset_dict['politifact'] = pd.DataFrame({'text':real_text+fake_text,'label':label})
+            #FakeNewsNet GossipCop
+            real_path = "FakeNewsNet/code/fakenewsnet_dataset/gossipcop/real/"
+            fake_path = "FakeNewsNet/code/fakenewsnet_dataset/gossipcop/fake/"
+            real_text = self.retrieve_text_path(real_path)
+            fake_text = self.retrieve_text_path(fake_path)    
+            label = [1] * len(real_text) + [0] * len(fake_text)        
+            dataset_dict['gossipcop'] = pd.DataFrame({'text':real_text+fake_text,'label':label})
             #LIAR
             dataset_dict['liar'] = {}
             dataset_dict['liar']['train'] = pd.read_csv('liar/train.csv',
@@ -58,12 +69,17 @@ class DataLoader:
             #20NewsGroup
             #https://scikit-learn.org/stable/datasets/real_world.html#newsgroups-dataset
             dataset_dict['twentynews'] = {}
-            dataset_dict['twentynews']['train'] = fetch_20newsgroups(subset='train',
+            twentynews_train = fetch_20newsgroups(subset='train',
                            remove=('headers', 'footers', 'quotes') #option to remove metadata 
                           )
-            dataset_dict['twentynews']['test'] = fetch_20newsgroups(subset='test',
+            twentynews_test = fetch_20newsgroups(subset='test',
                            remove=('headers', 'footers', 'quotes') #option to remove metadata  
                           )    
+
+            dataset_dict['twentynews']['train'] = pd.DataFrame({'label':twentynews_train['target'],
+                                     'text':twentynews_train['data']})
+            dataset_dict['twentynews']['test'] = pd.DataFrame({'label':twentynews_test['target'],
+                                     'text':twentynews_test['data']})  
             #AG News
             dataset_dict['agnews'] = {}
             dataset_dict['agnews']['train'] = pd.read_csv('ag_news/train.csv')
@@ -73,8 +89,10 @@ class DataLoader:
             col_dict = {0:'label',1:'title',2:'question',3:'answer'}
             dataset_dict['yahoo']['train'] = pd.read_csv('yahoo_answers/train.csv',
                           header=None).rename(columns=col_dict)
+            dataset_dict['yahoo']['train']['text'] = dataset_dict['yahoo']['train']['title'] + ' ' + dataset_dict['yahoo']['train']['question']+ ' ' + dataset_dict['yahoo']['train']['answer']
             dataset_dict['yahoo']['test'] = pd.read_csv('yahoo_answers/test.csv',
                           header=None).rename(columns=col_dict)
+            dataset_dict['yahoo']['test']['text'] = dataset_dict['yahoo']['test']['title'] + ' ' + dataset_dict['yahoo']['test']['question']+ ' ' + dataset_dict['yahoo']['test']['answer']
             
         #Sentiment Analysis 1 : Emotion
         os.chdir('../sentiment/emotion')
@@ -103,14 +121,14 @@ class DataLoader:
                              usecols=['Utterance','Label']).rename(columns={'Utterance':'text','Label':'label'})
             dataset_dict['silicone']['test'] = pd.read_csv('silicone/test.csv',
                              usecols=['Utterance','Label']).rename(columns={'Utterance':'text','Label':'label'})
-            #IMDb
-            dataset_dict['imdb'] = {}
-            dataset_dict['imdb']['train'] = pd.read_csv('IMDb/train.csv')
-            dataset_dict['imdb']['test'] = pd.read_csv('IMDb/test.csv')
 
         # Sentiment Analysis 2: Polarity  
         os.chdir('../polarity')
         if 'polarity' in self.subset:
+            #IMDb
+            dataset_dict['imdb'] = {}
+            dataset_dict['imdb']['train'] = pd.read_csv('IMDb/train.csv')
+            dataset_dict['imdb']['test'] = pd.read_csv('IMDb/test.csv')
             #YELP
             dataset_dict['yelp'] = {}
             dataset_dict['yelp']['train']  = pd.read_csv('yelp/train.csv')
