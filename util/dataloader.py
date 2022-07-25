@@ -12,7 +12,10 @@ class DataLoader:
                  subset=['fake_news','topic','emotion','polarity','sarcasm']):
         '''
         Loads all required datasets as pandas dataframes.
-        Output : a dictionary with the name of the dataset as key and the corresponding dataframe as value.
+        Param : 
+            subset (list) : task-related subsets to select
+        Output :
+            a dictionary with the name of the dataset as key and the corresponding dataframe as value.
         '''
         self.subset = subset
 

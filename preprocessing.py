@@ -12,8 +12,6 @@ import emoji
 download('stopwords')
 download('omw-1.4')
 
-
-
 class Preprocessor:
 
     def __init__(self,
@@ -21,6 +19,16 @@ class Preprocessor:
                  lemmatizer = WordNetLemmatizer(),
                  stopwords = stopwords.words('english'),
                  emojis = emoji.UNICODE_EMOJI_ENGLISH):
+        '''
+        The Preprocessor is used to convert raw text data  to a suitable format
+        Args:
+            is_tweet (bool) : If True, uses the TweetTokenizer to tokenize the text. If False, uses the standard word_tokenize method of nltk
+            lemmatizer (object) : the desired nltk lemmatizer object
+            stopwords (list) : a list of stopwords  to drop from the text
+            emojis (list) : a list of emojis to drop from the text
+        Output :
+            corpus (list) : a list of processed text
+        '''
 
         self.is_tweet = is_tweet
         self.lemmatizer = lemmatizer
@@ -37,17 +45,7 @@ class Preprocessor:
         text = ''.join(char for char in text if char not in punctuation)
         return text
 
-    # def remove_emojis(self,text):
-    #     #Remove emojis from string text
-    #     text = re.compile(pattern = "["
-    #     u"\U0001F600-\U0001F64F"  # emoticons
-    #     u"\U0001F300-\U0001F5FF"  # symbols & pictographs
-    #     u"\U0001F680-\U0001F6FF"  # transport & map symbols
-    #     u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
-    #                        "]+", flags = re.UNICODE).sub(r'',text)    
-                                 
-    #     return text
-    
+   
     def remove_repeated_letters(self, text):
         #If the same letters appears consecutively 3 times or more, reduce it to 1 occurence  (WIP implementation)
         text = re.compile(r'(.)\1{2,}', re.IGNORECASE).sub(r'\1',text)
@@ -87,7 +85,8 @@ class Preprocessor:
         return text
 
     def preprocess(self,df):
-        #Full preprocessing pipeline for a corpus
+        #Full preprocessing pipeline
+        #Takes a dataframe as input
         start_time = time()
         corpus = df['text'].fillna('').str.lower().to_list()
         corpus = [self.remove_unicode(text) for text in corpus]
