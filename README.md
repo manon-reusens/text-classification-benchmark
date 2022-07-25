@@ -12,8 +12,8 @@
 
 | Dataset | Task |  Classes  | Size |  Split |
 | --- | --- |  --- | --- | --- |
-| FakeNewsNet - Politifact | Fake News | 2 |  | |
-| FakeNewsNet - GossipCop | Fake News |2 |  | | 
+| FakeNewsNet - Politifact | Fake News | 2 |  | None |
+| FakeNewsNet - GossipCop | Fake News |2 |  | None | 
 | Fake & Real News | Fake News | 2 | |  |
 | LIAR | Fake News | 6 | | |
 | 20News | Topic | 20 | | |
@@ -21,13 +21,13 @@
 | Yahoo | Topic | 10 | |  |
 | TweetEval Emotion | Emotion | 4 | | |
 | CARER | Emotion | 8 | | |
-| DailyDialog Act - Silicone | Emotion | 7 | | |
-| IMDb | Polarity | 2 | | |
-| Stanford Sentiment Treebank | Polarity | 2 | | |
-| YELP | Polarity | 2 | | |
-| TweetEval Irony | Sarcasm | 2  | | | 
-| SemEval Task 3 | Sarcasm | 2(4) | | |
-| SARC | Sarcasm | 2 | |  |
+| DailyDialog Act - Silicone | Emotion | 7 | 102979 | Train-Val-Test |
+| IMDb | Polarity | 2 | 50000 | Train-Test |
+| Stanford Sentiment Treebank | Polarity | 2 | 68403 |  Train-Val-Test |
+| YELP | Polarity | 2 | 598000 | Train-Test |
+| TweetEval Irony | Sarcasm | 2  | 4601 | Train-Val-Test | 
+| SemEval Task 3 | Sarcasm | 2(4) | 4601 | Train-Test |
+| SARC | Sarcasm | 2 | 1409012 | Train-Test |
 
 
 
