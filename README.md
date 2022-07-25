@@ -10,6 +10,8 @@
 
 15 datasets are included
 
+Size : actual size of the collected datasets, differ most of the time with what is in the draft paper
+
 | Dataset | Task |  Classes  | Size |  Split |
 | --- | --- |  --- | --- | --- |
 | FakeNewsNet - Politifact | Fake News | 2 | 1056  | None (80% Train - 20% Test in paper) |
