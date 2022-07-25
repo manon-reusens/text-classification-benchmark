@@ -48,6 +48,5 @@ Size : actual size of the collected datasets, differ most of the time with what 
 * [IMDb](https://huggingface.co/datasets/imdb#dataset-creation)
 * [Stanford Sentiment Tree Bank](https://huggingface.co/datasets/sst2)
 * [Yelp polarity](https://huggingface.co/datasets/yelp_polarity)
-* [Tweet Eval : Irony detection](https://github.com/cardiffnlp/tweeteval)
 * [SemEval 2018 Task 3](https://github.com/Cyvhee/SemEval2018-Task3)
 * [SARC](https://nlp.cs.princeton.edu/SARC/1.0/)
