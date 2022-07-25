@@ -1,12 +1,39 @@
 # Experimental evaluation of the state-of-the-art in text classification
 
-### Structure
+## Structure
+* util/dataloader.py :  collect the datasets in their raw format and convert the useful columns to a pandas dataframe
+* huggingface_loading_script.py :  collect datasets from the huggingface hub and store them as csv files
+* preprocessing.py : preprocess raw text fields
 
 
-### Datasets
+## Datasets
 
-Link to sources 
+15 datasets are included
 
+| Dataset | Task |  Classes  | Size |  Split |
+| --- | --- |  --- | --- | --- |
+| FakeNewsNet - Politifact | Fake News | 2 |  | |
+| FakeNewsNet - GossipCop | Fake News |2 |  | | 
+| Fake & Real News | Fake News | 2 | |  |
+| LIAR | Fake News | 6 | | |
+| 20News | Topic | 20 | | |
+| AGNews | Topic | 4 |  | |
+| Yahoo | Topic | 10 | |  |
+| TweetEval Emotion | Emotion | 4 | | |
+| CARER | Emotion | 8 | | |
+| DailyDialog Act - Silicone | Emotion | 7 | | |
+| IMDb | Polarity | 2 | | |
+| Stanford Sentiment Treebank | Polarity | 2 | | |
+| YELP | Polarity | 2 | | |
+| TweetEval Irony | Sarcasm | 2  | | | 
+| SemEval Task 3 | Sarcasm | 2(4) | | |
+| SARC | Sarcasm | 2 | |  |
+
+
+
+
+
+### Links
 
 * [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet)
 * [Fake and Real News Dataset](https://www.kaggle.com/datasets/clmentbisaillon/fake-and-real-news-dataset)
