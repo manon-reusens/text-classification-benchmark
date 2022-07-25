@@ -145,17 +145,6 @@ class DataLoader:
         #Sentiment Analysis 3: Sarcasm
         os.chdir('../sarcasm')
         if 'sarcasm' in self.subset:
-            #Tweet Eval : Irony
-            dataset_dict['eval_irony'] = {}
-            dataset_dict['eval_irony']['train'] = pd.DataFrame()
-            dataset_dict['eval_irony']['val'] = pd.DataFrame()
-            dataset_dict['eval_irony']['test'] = pd.DataFrame()
-            dataset_dict['eval_irony']['train']['label'] = pd.read_table('tweetEval/train_labels.txt',header=None)
-            dataset_dict['eval_irony']['val']['label'] = pd.read_table('tweetEval/val_labels.txt',header=None)
-            dataset_dict['eval_irony']['test']['label'] = pd.read_table('tweetEval/test_labels.txt',header=None)
-            dataset_dict['eval_irony']['train']['text']= pd.read_table('tweetEval/train_text.txt',header=None,error_bad_lines=False)
-            dataset_dict['eval_irony']['val']['text']= pd.read_table('tweetEval/val_text.txt',header=None)
-            dataset_dict['eval_irony']['test']['text'] = pd.read_table('tweetEval/test_text.txt',header=None)
             #SemEval 2018 
             dataset_dict['semeval_A'] = {}
             dataset_dict['semeval_B'] = {}
