@@ -1,5 +1,4 @@
 #Import packages
-import matplotlib.pyplot as plt
 from nltk.tokenize import word_tokenize, TweetTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -47,8 +46,8 @@ class Preprocessor:
 
    
     def remove_repeated_letters(self, text):
-        #If the same letters appears consecutively 3 times or more, reduce it to 1 occurence  (WIP implementation)
-        text = re.compile(r'(.)\1{2,}', re.IGNORECASE).sub(r'\1',text)
+        #If the same letters appears consecutively 3 times or more, reduce it to 2 occurences  (WIP implementation)
+        text = re.compile(r'(.)\1{2,}', re.IGNORECASE).sub(r'\1'r'\1',text)
         return text
 
     def tokenize(self,text):
