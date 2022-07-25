@@ -1,0 +1,11 @@
+pandas
+numpy 
+os
+json
+tqdm 
+scikit-learn
+datasets
+re 
+time 
+emoji
+nltk
