@@ -1,11 +1,12 @@
 # Experimental evaluation of the state-of-the-art in text classification
 
-## TO DO 
-- which text content to keep (title as well?)
-- some datasets already have a train-val-test split, others don't 
-- check the running time of the preprocessing
+### Structure
 
-## Datasets
+
+### Datasets
+
+Link to sources 
+
 
 * [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet)
 * [Fake and Real News Dataset](https://www.kaggle.com/datasets/clmentbisaillon/fake-and-real-news-dataset)
