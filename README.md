@@ -12,9 +12,9 @@
 
 | Dataset | Task |  Classes  | Size |  Split |
 | --- | --- |  --- | --- | --- |
-| FakeNewsNet - Politifact | Fake News | 2 | 1056  | None |
-| FakeNewsNet - GossipCop | Fake News |2 | 18590 | None | 
-| Fake & Real News | Fake News | 2 | 44898 | None  |
+| FakeNewsNet - Politifact | Fake News | 2 | 1056  | None (80% Train - 20% Test in paper) |
+| FakeNewsNet - GossipCop | Fake News |2 | 18590 | None (80% Train - 20% Test in paper) | 
+| Fake & Real News | Fake News | 2 | 44898 | None  (5-fold wiht 80/20 Train-Test) |
 | LIAR | Fake News | 6 | 12836 | Train-Val-Test |
 | 20News | Topic | 20 | 18846 | Train-Test |
 | AGNews | Topic | 4 | 127600 | Train-Test |
