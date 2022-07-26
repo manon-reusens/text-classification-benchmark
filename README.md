@@ -29,6 +29,7 @@ Size : actual size of the collected datasets, differ most of the time with what 
 | YELP | Polarity | 2 | 598000 | Train-Test |
 | SemEval Task 3 | Sarcasm | 2(4) | 4601 | Train-Test |
 | SARC | Sarcasm | 2 | 1409012 | Train-Test |
+|iSarcasm | Sarcasm | 2 | 4484 | Train-Test | 
 
 
 
@@ -50,3 +51,4 @@ Size : actual size of the collected datasets, differ most of the time with what 
 * [Yelp polarity](https://huggingface.co/datasets/yelp_polarity)
 * [SemEval 2018 Task 3](https://github.com/Cyvhee/SemEval2018-Task3)
 * [SARC](https://nlp.cs.princeton.edu/SARC/1.0/)
+* [iSarcasm](https://github.com/silviu-oprea/isarcasm) 
