@@ -172,6 +172,12 @@ class DataLoader:
                     sep='\t',
                     header=None,
                     usecols=[0,1]).rename(columns={0:'label',1:'text'})
+
+            #iSarcasm
+            dataset_dict['iSarcasm'] = {}
+            dataset_dict['iSarcasm']['train'] = pd.read_csv('iSarcasm/train/train.En.csv',
+                                                             usecols=['tweet','sarcastic']).rename(columns={'tweet':'text','sarcastic':'label'})
+            dataset_dict['iSarcasm']['test'] = pd.read_csv('iSarcasm/test/task_A_En_test.csv').rename(columns={'sarcastic':'label'})
         os.chdir('../../..') #Return to home directory
         
         return dataset_dict
