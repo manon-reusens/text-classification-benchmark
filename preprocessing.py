@@ -10,6 +10,8 @@ import emoji
 #Load linguistics resources
 download('stopwords')
 download('omw-1.4')
+download('punkt')
+download('wordnet')
 
 class Preprocessor:
 
