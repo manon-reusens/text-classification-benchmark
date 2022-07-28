@@ -7,6 +7,6 @@ scikit-learn
 datasets
 re 
 time 
-emoji
-nltk
+emoji=1.6.1
+nltk=3.7
 carbontracker
