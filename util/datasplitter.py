@@ -1,11 +1,11 @@
 #Import packages
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from preprocessor import Preprocessor
+from preprocessing import Preprocessor
 
 
 
-def train_val_test_preparation(dataset,
+def data_splitter(dataset,
                                preprocessor=Preprocessor(),
                                val_set=False,
                                test_set=True,
