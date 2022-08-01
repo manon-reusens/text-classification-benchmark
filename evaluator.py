@@ -1,32 +1,58 @@
 #Import pakcages
 from sklearn.metrics import accuracy_score, f1_score, average_precision_score, roc_auc_score
-from sklearn.pipeline import Pipeline
-from sklearn.feature_extraction.text import TfidfVectorizer
 import pickle
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.pipeline import Pipeline
 from codecarbon import EmissionsTracker
-
 
 def evaluate_classifier(clf,
                         train,
                         test, 
-                        vectorizer=TfidfVectorizer(),
+                        tfidf=True,
                         print_metrics=True,
-                        return_carbon=True,
+                        track_carbon=True,
                         save_model=False,
                         model_path=None,
                         carbon_path='output/emissions.csv'):
-  if return_carbon:
+  '''
+  Evaluate a model on the test set after fitting it on the train set.
+  Args:
+    clf (object) : the classifier to use
+    train (pandas.DataFrame) : the train set. It can consist of 2 columns (text and label) or more (embeddings dimensions and label)
+    test  (pandas.dataFrame) : the test set. It can consist of 2 columns (text and label) or more (embeddings dimensions and label)
+    tfidf (bool) : If True, uses Tf-Idf to vectorizer the input text. Else, uses the provided input embeddings.
+    print_metrics (bool): If True, prints the evaluation metrics.
+    return_carbon (bool) : If True, tracks the carbon emissions while executing the function.
+    save_model (bool) : If True, saves the model to the desired folder
+    model_path (str) : Path to the desired location to save the model as a pickle file.
+    carbon_path (str) : path to the desired location for  the carbon tracker output.
+  Returns:
+    metrics (dict) : A dictionary of evaluation metrics.
+  '''
+  if track_carbon:
     tracker = EmissionsTracker(project_name=model_path,log_level='warning', measure_power_secs=300,output_file=carbon_path)
     tracker.start()
-  #Create a pipeline object
-  pipe = Pipeline([('word_representation',vectorizer),('clf',clf)])
-  #Fit the pipeline
-  pipe.fit(train['text'],train['label'])
+
+  #TfIdf pipeline
+  if tfidf:
+    pipe = Pipeline([('word_representation',TfidfVectorizer()),('clf',clf)])
+    #Fit the pipeline
+    pipe.fit(train['text'],train['label'])
+    #Make predictions
+    predictions = pipe.predict(test['text'])
+    predictions_proba = pipe.predict_proba(test['text'])[:,1]
   
-  #Make predictions
-  predictions = pipe.predict(test['text'])
-  predictions_proba = pipe.predict_proba(test['text'])[:,1]
-  print()
+  #No vectorization needed (e.g. text is already converted to embeddings)
+  else:
+    try:
+      pipe = Pipeline([('clf',clf)])
+      pipe.fit(train.drop(columns=['label']),train['label'])
+      predictions = pipe.predict(test.drop(columns=['label']))
+      predictions_proba = pipe.predict_proba(test.drop(columns=['label']))[:,1]
+    except:
+      raise ValueError('Invalid input format.')
+
+
   #Evaluate
   metrics = {}
   metrics['Accuracy'] = accuracy_score(test['label'],predictions)
@@ -46,7 +72,7 @@ def evaluate_classifier(clf,
   if save_model:
     pickle.dump(pipe['clf'],open(model_path,'wb'))
   #Stop the tracker if needed
-  if return_carbon:
+  if track_carbon:
     tracker.stop()
 
   return metrics
