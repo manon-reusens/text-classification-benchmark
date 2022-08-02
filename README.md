@@ -3,6 +3,9 @@
 ## Structure
 * util/dataloader.py :  collect the datasets in their raw format and convert the useful columns to a pandas dataframe
 * util/datasplitter.py : splits a dataset into its train-(val)-test set components
+* evaluator.py : fits a model on the train data and evaluates it on the test set
+* hyperopt.py : TO DO
+* fasttext_embeddings.py : loads fast text embeddings and generates sentence embeddings for a corpus
 * huggingface_loading_script.py :  collect datasets from the huggingface hub and store them as csv files
 * preprocessing.py : preprocess raw text fields
 
