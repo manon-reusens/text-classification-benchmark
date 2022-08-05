@@ -1,0 +1,33 @@
+method: random   #Available options : [grid, random, bayes]
+entity: benchmark-nlp 
+project: hyperopt
+metric:
+    #Metric is only relevant for bayesian search
+    name: loss
+    goal: minimize
+
+parameters: 
+    #Describe parameters here : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC
+    
+    C:
+        min: 0    
+        max: 10
+        distribution: uniform   #Many distributions available : https://docs.wandb.ai/guides/sweeps/configuration#distribution
+    kernel:
+        values: ['linear','rbf','poly','sigmoig','precomputed']
+    min_samples_split:
+        min:
+        max:
+        distribution: int_uniform
+    min_samples_leaf:
+        min:
+        max:
+        distribution: int_uniform
+    max_features:
+        values: ['log2','sqrt']
+    bootstrap:
+        values: [True, False]
+    
+    random_state:
+        value: 42
+
