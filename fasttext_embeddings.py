@@ -1,6 +1,5 @@
 #Load packages
 import pandas as pd
-import io
 from tqdm import tqdm
 from copy import deepcopy
 import fasttext
