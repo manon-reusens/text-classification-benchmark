@@ -3,7 +3,13 @@ import pandas as pd
 from tqdm import tqdm
 from copy import deepcopy
 import fasttext
+import fasttext.util
+import os
 
+def download(directory='/fasttext'):
+    if not os.path.isdir(directory):
+        os.makedirs(directory)
+    fasttext.util.download_model('en',if_exists='ignore')
 
 class FastTextEmbeddings:
 
