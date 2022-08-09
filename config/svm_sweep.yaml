@@ -14,20 +14,8 @@ parameters:
         max: 10
         distribution: uniform   #Many distributions available : https://docs.wandb.ai/guides/sweeps/configuration#distribution
     kernel:
-        values: ['linear','rbf','poly','sigmoig','precomputed']
-    min_samples_split:
-        min:
-        max:
-        distribution: int_uniform
-    min_samples_leaf:
-        min:
-        max:
-        distribution: int_uniform
-    max_features:
-        values: ['log2','sqrt']
-    bootstrap:
-        values: [True, False]
-    
+        values: ['linear','rbf']
+
     random_state:
         value: 42
 
