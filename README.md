@@ -4,7 +4,6 @@
 * util/dataloader.py :  collect the datasets in their raw format and convert the useful columns to a pandas dataframe
 * util/datasplitter.py : splits a dataset into its train-(val)-test set components
 * evaluator.py : fits a model on the train data and evaluates it on the test set
-* hyperopt.py : TO DO
 * fasttext_embeddings.py : loads fast text embeddings and generates sentence embeddings for a corpus
 * huggingface_loading_script.py :  collect datasets from the huggingface hub and store them as csv files
 * preprocessing.py : preprocess raw text fields
@@ -14,13 +13,27 @@
 
 15 datasets are included
 
-Size : actual size of the collected datasets, differ most of the time with what is in the draft paper
+Size : actual size of the collected datasets, differ most of the time with what is in the draft paper. 
+Datasets should be added to a 'datasets' folder with the following structure
+```
+datasets 
+│
+└───fake_news
+│   │   
+│   └─── liar
+│   |
+│   └─── 
+│   
+│   
+└───folder2
+    │   file021.txt
+    │   file022.txt
+```
 
 | Dataset | Task |  Classes  | Size |  Split |
 | --- | --- |  --- | --- | --- |
 | FakeNewsNet - Politifact | Fake News | 2 | 1056  | None (80% Train - 20% Test in paper) |
 | FakeNewsNet - GossipCop | Fake News |2 | 18590 | None (80% Train - 20% Test in paper) | 
-| Fake & Real News | Fake News | 2 | 44898 | None  (5-fold wiht 80/20 Train-Test) |
 | LIAR | Fake News | 6 | 12836 | Train-Val-Test |
 | 20News | Topic | 20 | 18846 | Train-Test |
 | AGNews | Topic | 4 | 127600 | Train-Test |
@@ -41,8 +54,9 @@ Size : actual size of the collected datasets, differ most of the time with what 
 
 ### Links
 
+The datasets can be retrieved with the following links.
+
 * [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet)
-* [Fake and Real News Dataset](https://www.kaggle.com/datasets/clmentbisaillon/fake-and-real-news-dataset)
 * [LIAR](https://huggingface.co/datasets/liar)
 * [20News](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_20newsgroups.html)
 * [AGNews](https://huggingface.co/datasets/ag_news)
