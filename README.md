@@ -19,15 +19,14 @@ Datasets should be added to a 'datasets' folder with the following structure
 datasets 
 │
 └───fake_news
-│   │   
-│   └─── liar
-│   |
-│   └─── 
+│   │  liar 
+│   |  FakesNewsNet
 │   
-│   
-└───folder2
-    │   file021.txt
-    │   file022.txt
+└───topic
+|   │   agnews
+|   │   yahoo_answers
+|   
+    
 ```
 
 | Dataset | Task |  Classes  | Size |  Split |
