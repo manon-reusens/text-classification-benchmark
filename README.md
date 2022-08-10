@@ -1,6 +1,8 @@
 # Experimental evaluation of the state-of-the-art in text classification
 
 ## Structure
+* config : contains the yaml file with the hyperparameter configurations for Weight&Biases
+* notebooks :  contains example notebooks
 * preprocessing/fasttext_embeddings.py : loads fast text embeddings and generates sentence embeddings for a corpus
 * preprocessing/preprocessor.py : preprocess raw text fields
 * util/dataloader.py :  collect the datasets in their raw format and convert the useful columns to a pandas dataframe
