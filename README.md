@@ -11,23 +11,9 @@
 
 ## Datasets
 
-15 datasets are included
-
-Size : actual size of the collected datasets, differ most of the time with what is in the draft paper. 
-Datasets should be added to a 'datasets' folder with the following structure
-```
-datasets 
-│
-└───fake_news
-│   │  liar 
-│   |  FakesNewsNet
-│   
-└───topic
-|   │   agnews
-|   │   yahoo_answers
-|   
-    
-```
+Instructions draft : the datasets are collected by running 'data_collection.py'. The only exception is FakeNewsNet which needs to be downloaded separately by :
+1) cloning the [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) repository in a directory datasets/fake_news/FakeNewsNet
+2) Following the instructions in the readme of the FakeNewsNet repository
 
 | Dataset | Task |  Classes  | Size |  Split |
 | --- | --- |  --- | --- | --- |
@@ -46,9 +32,6 @@ datasets
 | SemEval Task 3 | Sarcasm | 2(4) | 4601 | Train-Test |
 | SARC | Sarcasm | 2 | 1409012 | Train-Test |
 |iSarcasm - English | Sarcasm | 2 | 5735 | Train-Test | 
-
-
-
 
 
 ### Links
