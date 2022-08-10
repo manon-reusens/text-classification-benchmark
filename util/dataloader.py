@@ -1,6 +1,5 @@
 #Import packages
 import pandas as pd
-import numpy as np
 import os 
 import json
 from tqdm import tqdm
@@ -43,7 +42,8 @@ class DataLoader:
             # real_news['label'] = np.full(shape=(real_news.shape[0],1),fill_value=1)
             # fake_news['label'] = np.zeros(shape=(fake_news.shape[0],1))
             # dataset_dict['fake_real_news'] = pd.concat([real_news,fake_news]).reset_index(drop=True)
-            if os.path.isdir('FakeNewsNet'): 
+            
+            if len(os.listdir('FakeNewsNet'))!=0: 
             # The FakeNewsData has been added following the intructions in this repository : https://github.com/KaiDMML/FakeNewsNet 
             #FakeNewsNet Politifact
                 real_path = "FakeNewsNet/code/fakenewsnet_dataset/politifact/real/"
@@ -105,12 +105,12 @@ class DataLoader:
             dataset_dict['eval_emotion']['train'] = pd.DataFrame()
             dataset_dict['eval_emotion']['val'] = pd.DataFrame()
             dataset_dict['eval_emotion']['test'] = pd.DataFrame()
-            dataset_dict['eval_emotion']['train']['label'] = pd.csv('tweetEval/train_labels.txt',header=None)
-            dataset_dict['eval_emotion']['val']['label'] = pd.csv('tweetEval/val_labels.txt',header=None)
-            dataset_dict['eval_emotion']['test']['label'] = pd.csv('tweetEval/test_labels.txt',header=None)
-            dataset_dict['eval_emotion']['train']['text']= pd.csv('tweetEval/train_text.txt',header=None)
-            dataset_dict['eval_emotion']['val']['text']= pd.csv('tweetEval/val_text.txt',header=None)
-            dataset_dict['eval_emotion']['test']['text'] = pd.csv('tweetEval/test_text.txt',header=None)
+            dataset_dict['eval_emotion']['train']['label'] = pd.read_csv('tweetEval/train_labels.csv',header=None)
+            dataset_dict['eval_emotion']['val']['label'] = pd.read_csv('tweetEval/val_labels.csv',header=None)
+            dataset_dict['eval_emotion']['test']['label'] = pd.read_csv('tweetEval/test_labels.csv',header=None)
+            dataset_dict['eval_emotion']['train']['text']= pd.read_csv('tweetEval/train_text.csv',header=None)
+            dataset_dict['eval_emotion']['val']['text']= pd.read_csv('tweetEval/val_text.csv',header=None)
+            dataset_dict['eval_emotion']['test']['text'] = pd.read_csv('tweetEval/test_text.csv',header=None)
             #CARER
             dataset_dict['CARER'] = {}
             dataset_dict['CARER']['train'] = pd.read_csv('CARER/train.csv')
@@ -154,25 +154,19 @@ class DataLoader:
                                                 usecols=['Label','Tweet text']).rename(columns = {'Label':'label','Tweet text':'text'})
             dataset_dict['semeval_A']['test'] = pd.DataFrame()
             dataset_dict['semeval_B']['test'] = pd.DataFrame()
-            dataset_dict['semeval_A']['test']['text'] = pd.csv('SemEval/test_taskA.csv',
+            dataset_dict['semeval_A']['test']['text'] = pd.read_csv('SemEval/test-taskA.csv',
                                                 usecols=['tweet text'])
-            dataset_dict['semeval_B']['test']['text'] = pd.csv('SemEval/test_taskB.csv',
+            dataset_dict['semeval_B']['test']['text'] = pd.read_csv('SemEval/test-taskB.csv',
                                                 usecols=['tweet text'])
 
-            dataset_dict['semeval_A']['test']['label'] = pd.csv('SemEval/gold_test_taskA_emoji.csv',
+            dataset_dict['semeval_A']['test']['label'] = pd.read_csv('SemEval/gold_test_taskA_emoji.csv',
                                                 usecols=['Label'])
-            dataset_dict['semeval_B']['test']['label'] = pd.csv('SemEval/gold_test_taskB_emoji.csv',
+            dataset_dict['semeval_B']['test']['label'] = pd.read_csv('SemEval/gold_test_taskB_emoji.csv',
                                                 usecols=['Label'])
             #SARC V1.0 balanced dataset
             dataset_dict['sarc'] = {}
-            dataset_dict['sarc']['train'] = pd.read_csv('SARC/train-balanced.csv',
-                    sep='\t',
-                    header=None,
-                    usecols=[0,1]).rename(columns={0:'label',1:'text'})
-            dataset_dict['sarc']['test'] = pd.read_csv('SARC/test-balanced.csv',
-                    sep='\t',
-                    header=None,
-                    usecols=[0,1]).rename(columns={0:'label',1:'text'})
+            dataset_dict['sarc']['train'] = pd.read_csv('SARC/train-balanced.csv')
+            dataset_dict['sarc']['test'] = pd.read_csv('SARC/test-balanced.csv')
 
             #iSarcasm
             dataset_dict['iSarcasm'] = {}
