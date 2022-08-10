@@ -28,6 +28,7 @@ def evaluate_classifier(clf,
     carbon_path (str) : path to the desired location for  the carbon tracker output.
   Returns:
     metrics (dict) : A dictionary of evaluation metrics.
+    predictions (array): An array with the integer prediction on the test set.
   '''
   if track_carbon:
     tracker = EmissionsTracker(project_name=model_path,log_level='warning', measure_power_secs=300,output_file=carbon_path)
@@ -75,4 +76,4 @@ def evaluate_classifier(clf,
   if track_carbon:
     tracker.stop()
 
-  return metrics
+  return metrics, predictions
