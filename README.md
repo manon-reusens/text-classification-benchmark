@@ -1,19 +1,24 @@
 # Experimental evaluation of the state-of-the-art in text classification
 
 ## Structure
+* preprocessing/fasttext_embeddings.py : loads fast text embeddings and generates sentence embeddings for a corpus
+* preprocessing/preprocessor.py : preprocess raw text fields
 * util/dataloader.py :  collect the datasets in their raw format and convert the useful columns to a pandas dataframe
 * util/datasplitter.py : splits a dataset into its train-(val)-test set components
+* data_collection.py :  collect datasets from the web and store them as csv files
 * evaluator.py : fits a model on the train data and evaluates it on the test set
-* fasttext_embeddings.py : loads fast text embeddings and generates sentence embeddings for a corpus
-* huggingface_loading_script.py :  collect datasets from the huggingface hub and store them as csv files
-* preprocessing.py : preprocess raw text fields
 
 
 ## Datasets
 
-Instructions draft : the datasets are collected by running 'data_collection.py'. The only exception is FakeNewsNet which needs to be downloaded separately by :
-1) cloning the [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) repository in a directory datasets/fake_news/FakeNewsNet
-2) Following the instructions in the readme of the FakeNewsNet repository
+Instructions for datasets collection : 
+
+1. Run 'data_collection.py'. This will download all datasets except FakeNewsNet.
+2. Clone the [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) repository in datasets/fake_news/FakeNewsBet
+3. Follow the data collection instructions in the readm file of FakeNewsNet
+
+
+### Structure of the datasets
 
 | Dataset | Task |  Classes  | Size |  Split |
 | --- | --- |  --- | --- | --- |
@@ -42,7 +47,7 @@ The datasets can be retrieved with the following links.
 * [LIAR](https://huggingface.co/datasets/liar)
 * [20News](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_20newsgroups.html)
 * [AGNews](https://huggingface.co/datasets/ag_news)
-* [Yahoo!Answer](https://drive.google.com/uc?export=download&id=0Bz8a_Dbh9Qhbd2JNdDBsQUdocVU)
+* [Yahoo!Answer](https://huggingface.co/datasets/yahoo_answers_topics)
 * [Tweet Eval : Emotion detection](https://github.com/cardiffnlp/tweeteval)
 * [CARER Emotion](https://huggingface.co/datasets/emotion)
 * [Daily Dialog Act Corpus (silicone)](https://huggingface.co/datasets/silicone/viewer/dyda_e/train)
