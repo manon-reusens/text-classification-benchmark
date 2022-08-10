@@ -7,6 +7,7 @@ import fasttext.util
 import os
 
 def download(directory='/fasttext'):
+    os.chdir('..')
     if not os.path.isdir(directory):
         os.makedirs(directory)
     fasttext.util.download_model('en',if_exists='ignore')
