@@ -1,6 +1,7 @@
 #Import pakcages
 from sklearn.metrics import accuracy_score, f1_score, average_precision_score, roc_auc_score
 import pickle
+import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
 from codecarbon import EmissionsTracker
@@ -9,8 +10,8 @@ def evaluate_classifier(clf,
                         train,
                         test, 
                         tfidf=True,
-                        print_metrics=True,
-                        track_carbon=True,
+                        print_metrics=False,
+                        track_carbon=False,
                         save_model=False,
                         model_path=None,
                         carbon_path='output/emissions.csv'):
@@ -30,6 +31,7 @@ def evaluate_classifier(clf,
     metrics (dict) : A dictionary of evaluation metrics.
     predictions (array): An array with the integer prediction on the test set.
   '''
+  
   if track_carbon:
     tracker = EmissionsTracker(project_name=model_path,log_level='warning', measure_power_secs=300,output_file=carbon_path)
     tracker.start()
@@ -63,7 +65,7 @@ def evaluate_classifier(clf,
     metrics['AUC ROC'] = roc_auc_score(test['label'],predictions_proba)
   else:
     metrics['AUC PC'] = '-'
-    metrics['AUC ROC'] = '_'
+    metrics['AUC ROC'] = '-'
   if print_metrics:
     print('Accuracy test set : %s'%metrics['Accuracy'])
     print('F1 score test set: %s'%metrics['Macro F1'])
@@ -77,3 +79,52 @@ def evaluate_classifier(clf,
     tracker.stop()
 
   return metrics, predictions
+
+
+
+def get_summary_dataset(name,
+                        train,
+                        test,
+                        embedded_train,
+                        embedded_test, 
+                        models_dict,to_csv=True):
+  '''
+  Stores all predictions and evaluation metrics for a dataset and a selected number of models. For each model, both the tfidf and fasttext
+  versions are evaluated.
+  Args:
+   name (str) : the name of the dataset, used for the output files path
+   train (pandas.DataFrame): the train set in non-embedded format
+   test (pandas.DataFrame):  the test set in non-embedded format
+   embedded_train (pandas.DataFrame): the train set in embedded format
+   embedded_test (pandas.DataFrame); the test set in embedded format
+   models_dict (dict): a dictionary with the model acronyme as key (e.g. 'lr ,'rf') and the sklearn object of the corresponding model as value
+   to_csv (bool): if True, saves the predictions and metrics DataFrames to csv
+  Returns:
+    metrics_df (pandas.DataFrame): a DataFrame with metrics as rows and models as columns
+    preds_df (pandas.DataFrame) : a DataFrame with the predictions for all the models
+    
+  '''
+  if not os.path.isdir('models'):
+      os.makedirs('models')
+  metrics_df=pd.DataFrame()
+  preds_df=pd.DataFrame({'label':test['label']})
+  for k in models_dict.keys():
+      if not os.path.isdir('models/'+k):
+          os.makedirs('models/'+k)
+      metrics_tfidf, preds_df['tfidf_'+k] = evaluate_classifier(models_dict[k],train,test,
+                                                        save_model=True, model_path='models/'+k+'/'+k+'_tfidf_'+name)
+      metrics_ft, preds_df['ft_'+k] = evaluate_classifier(models_dict[k],embedded_train,embedded_test, tfidf=False,
+                                                  save_model=True, model_path='models/'+k+'/'+k+'_ft_'+name)
+      metrics_df['tfidf_'+k] = metrics_tfidf.values()
+      metrics_df['ft_'+k] = metrics_ft.values()
+      
+  if not os.path.isdir('output/metrics'):
+      os.makedirs('output/metrics')
+  if not os.path.isdir('output/predictions'):
+      os.makedirs('output/predictions')
+  if to_csv:
+    metrics_df.rename(index={0:'Accuracy',1:'F1 Macro',2:'AUC PC',3: 'AUC ROC'}).to_csv('output/metrics/'+name+'.csv')
+    preds_df.to_csv('output/predictions/'+name+'.csv',index=False) 
+  
+  return metrics_df, preds_df
+
