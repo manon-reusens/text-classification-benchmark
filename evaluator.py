@@ -117,17 +117,17 @@ def get_summary_dataset(name,
   metrics_df=pd.DataFrame()
   preds_df=pd.DataFrame({'label':test['label']})
   for k in models_dict.keys():
-    if not os.path.isdir('models/'+k):
-        os.makedirs('models/'+k)
+    if not os.path.isdir('models/'+name):
+        os.makedirs('models/'+name)
     if 'tfidf' in k:
       #The classifier requires tf-idf preprocessing
       metrics_tfidf, preds_df[k] = evaluate_classifier(models_dict[k],train,test, tfidf=True,
-                                                      save_model=save_model,track_carbon=track_carbon, model_path='models/'+name+'/'+k)
+                                                      save_model=save_model,track_carbon=track_carbon, model_path='models/'+name+'/'+k+'.sav')
       metrics_df[k] = metrics_tfidf.values()
     else:
       #The classifier does not require tf-idf preprocessing (e.g. fasttext or deep learning)
       metrics_emb, preds_df[k] = evaluate_classifier(models_dict[k],embedded_train,embedded_test, tfidf=False,
-                                                save_model=save_model, track_carbon=track_carbon, model_path='models/'+name+'/'+k)
+                                                save_model=save_model, track_carbon=track_carbon, model_path='models/'+name+'/'+k+'.sav')
       metrics_df[k] = metrics_emb.values()
       
   if not os.path.isdir('output/metrics'):

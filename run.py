@@ -8,6 +8,7 @@ from evaluator import evaluate_classifier, get_summary_dataset
 from nltk import download
 import warnings
 warnings.filterwarnings('ignore')
+import os
 
 #Load model configurations with best hyperparameters
 from config.best_params import best_params
@@ -53,5 +54,8 @@ if __name__=='__main__':
     download('omw-1.4', quiet=True)
     download('punkt', quiet=True)
     download('wordnet', quiet=True)
+    #Create an output folder
+    if not os.path.isdir('output'):
+        os.makedirs('output')
 
     run_task('fake_news')
