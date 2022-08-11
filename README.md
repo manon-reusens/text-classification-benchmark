@@ -26,6 +26,7 @@ Instructions for datasets collection :
 | --- | --- |  --- | --- | --- |
 | FakeNewsNet - Politifact | Fake News | 2 | 1056  | None (80% Train - 20% Test in paper) |
 | FakeNewsNet - GossipCop | Fake News |2 | 18590 | None (80% Train - 20% Test in paper) | 
+| CoAID | Fake News | 2 |  3669     | None (75% Train - 20% Test in paper) |
 | LIAR | Fake News | 6 | 12836 | Train-Val-Test |
 | 20News | Topic | 20 | 18846 | Train-Test |
 | AGNews | Topic | 4 | 127600 | Train-Test |
@@ -46,6 +47,7 @@ Instructions for datasets collection :
 The datasets can be retrieved with the following links.
 
 * [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet)
+* [CoAID](https://github.com/cuilimeng/CoAID)
 * [LIAR](https://huggingface.co/datasets/liar)
 * [20News](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_20newsgroups.html)
 * [AGNews](https://huggingface.co/datasets/ag_news)
