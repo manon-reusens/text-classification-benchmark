@@ -47,6 +47,7 @@ Instructions for datasets collection :
 The datasets can be retrieved with the following links.
 
 * [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet)
+* [CoAID](https://github.com/cuilimeng/CoAID)
 * [LIAR](https://huggingface.co/datasets/liar)
 * [20News](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_20newsgroups.html)
 * [AGNews](https://huggingface.co/datasets/ag_news)
