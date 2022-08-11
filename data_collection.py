@@ -30,17 +30,17 @@ if not os.path.exists('datasets'):
 os.chdir('datasets')
 os.makedirs('fake_news/liar')
 os.makedirs('fake_news/FakeNewsNet')
-os.makedirs('topic/ag_news')
-os.makedirs('topic/yahoo_answers')
+os.makedirs('topic/agnews')
+os.makedirs('topic/yahoo')
 os.makedirs('sentiment/emotion/tweetEval')
 os.makedirs('sentiment/emotion/CARER')
 os.makedirs('sentiment/emotion/silicone')
-os.makedirs('sentiment/polarity/IMDb')
+os.makedirs('sentiment/polarity/imdb')
 os.makedirs('sentiment/polarity/yelp')
-os.makedirs('sentiment/polarity/SST2')
+os.makedirs('sentiment/polarity/sst2')
 os.makedirs('sentiment/sarcasm/SemEval')
 os.makedirs('sentiment/sarcasm/iSarcasm')
-os.makedirs('sentiment/sarcasm/SARC')
+os.makedirs('sentiment/sarcasm/sarc')
 
 
 #GitHub datasets
@@ -64,19 +64,19 @@ pd.read_csv('https://raw.githubusercontent.com/iabufarha/iSarcasmEval/main/test/
 print('github okay')
 #Archives
 #SARC
-pd.read_csv('https://nlp.cs.princeton.edu/SARC/1.0/main/test-balanced.csv.bz2',sep='\t',compression='bz2',header=None,usecols=[0,1]).rename(columns={0:'label',1:'text'}).to_csv('sentiment/sarcasm/SARC/test-balanced.csv',index=False)
-pd.read_csv('https://nlp.cs.princeton.edu/SARC/1.0/main/train-balanced.csv.bz2',sep='\t',compression='bz2',header=None,usecols=[0,1]).rename(columns={0:'label',1:'text'}).to_csv('sentiment/sarcasm/SARC/train-balanced.csv',index=False)
+pd.read_csv('https://nlp.cs.princeton.edu/SARC/1.0/main/test-balanced.csv.bz2',sep='\t',compression='bz2',header=None,usecols=[0,1]).rename(columns={0:'label',1:'text'}).to_csv('sentiment/sarcasm/sarc/test-balanced.csv',index=False)
+pd.read_csv('https://nlp.cs.princeton.edu/SARC/1.0/main/train-balanced.csv.bz2',sep='\t',compression='bz2',header=None,usecols=[0,1]).rename(columns={0:'label',1:'text'}).to_csv('sentiment/sarcasm/sarc/train-balanced.csv',index=False)
 
 
 #HuggingFace datasets
 huggingface_to_csv('silicone','dyda_e','sentiment/emotion/silicone/')
 huggingface_to_csv('liar','default','fake_news/liar/')
 huggingface_to_csv('emotion','default','sentiment/emotion/CARER/')
-huggingface_to_csv('imdb','plain_text','sentiment/polarity/IMDb/')
-huggingface_to_csv('ag_news','default','topic/ag_news/')
-huggingface_to_csv('yahoo_answers_topics','yahoo_answers_topics','topic/yahoo_answers/')
+huggingface_to_csv('imdb','plain_text','sentiment/polarity/imdb/')
+huggingface_to_csv('ag_news','default','topic/agnews/')
+huggingface_to_csv('yahoo_answers_topics','yahoo_answers_topics','topic/yahoo/')
 huggingface_to_csv('yelp_polarity','plain_text','sentiment/polarity/yelp/')
-huggingface_to_csv('sst2','default','sentiment/polarity/SST2/')
+huggingface_to_csv('sst2','default','sentiment/polarity/sst2/')
 
 
 #Return to root directory

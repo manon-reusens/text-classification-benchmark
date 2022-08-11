@@ -87,30 +87,30 @@ class DataLoader:
                                      'text':twentynews_test['data']})  
             #AG News
             dataset_dict['agnews'] = {}
-            dataset_dict['agnews']['train'] = pd.read_csv('ag_news/train.csv')
-            dataset_dict['agnews']['test'] = pd.read_csv('ag_news/test.csv')
+            dataset_dict['agnews']['train'] = pd.read_csv('agnews/train.csv')
+            dataset_dict['agnews']['test'] = pd.read_csv('agnews/test.csv')
             #Yahoo answers
             dataset_dict['yahoo'] = {}
             col_dict = {'topic':'label','question_title':'title','question_content':'question','best_answer':'answer'}
-            dataset_dict['yahoo']['train'] = pd.read_csv('yahoo_answers/train.csv').rename(columns=col_dict)
+            dataset_dict['yahoo']['train'] = pd.read_csv('yahoo/train.csv').rename(columns=col_dict)
             dataset_dict['yahoo']['train']['text'] = dataset_dict['yahoo']['train']['title'] + ' ' + dataset_dict['yahoo']['train']['question']+ ' ' + dataset_dict['yahoo']['train']['answer']
-            dataset_dict['yahoo']['test'] = pd.read_csv('yahoo_answers/test.csv').rename(columns=col_dict)
+            dataset_dict['yahoo']['test'] = pd.read_csv('yahoo/test.csv').rename(columns=col_dict)
             dataset_dict['yahoo']['test']['text'] = dataset_dict['yahoo']['test']['title'] + ' ' + dataset_dict['yahoo']['test']['question']+ ' ' + dataset_dict['yahoo']['test']['answer']
             
         #Sentiment Analysis 1 : Emotion
         os.chdir('../sentiment/emotion')
         if 'emotion' in self.subset:
             #Tweet Eval : Emotion
-            dataset_dict['eval_emotion'] = {}
-            dataset_dict['eval_emotion']['train'] = pd.DataFrame()
-            dataset_dict['eval_emotion']['val'] = pd.DataFrame()
-            dataset_dict['eval_emotion']['test'] = pd.DataFrame()
-            dataset_dict['eval_emotion']['train']['label'] = pd.read_csv('tweetEval/train_labels.csv',header=None)
-            dataset_dict['eval_emotion']['val']['label'] = pd.read_csv('tweetEval/val_labels.csv',header=None)
-            dataset_dict['eval_emotion']['test']['label'] = pd.read_csv('tweetEval/test_labels.csv',header=None)
-            dataset_dict['eval_emotion']['train']['text']= pd.read_csv('tweetEval/train_text.csv',header=None)
-            dataset_dict['eval_emotion']['val']['text']= pd.read_csv('tweetEval/val_text.csv',header=None)
-            dataset_dict['eval_emotion']['test']['text'] = pd.read_csv('tweetEval/test_text.csv',header=None)
+            dataset_dict['tweetEval'] = {}
+            dataset_dict['tweetEval']['train'] = pd.DataFrame()
+            dataset_dict['tweetEval']['val'] = pd.DataFrame()
+            dataset_dict['tweetEval']['test'] = pd.DataFrame()
+            dataset_dict['tweetEval']['train']['label'] = pd.read_csv('tweetEval/train_labels.csv',header=None)
+            dataset_dict['tweetEval']['val']['label'] = pd.read_csv('tweetEval/val_labels.csv',header=None)
+            dataset_dict['tweetEval']['test']['label'] = pd.read_csv('tweetEval/test_labels.csv',header=None)
+            dataset_dict['tweetEval']['train']['text']= pd.read_csv('tweetEval/train_text.csv',header=None)
+            dataset_dict['tweetEval']['val']['text']= pd.read_csv('tweetEval/val_text.csv',header=None)
+            dataset_dict['tweetEval']['test']['text'] = pd.read_csv('tweetEval/test_text.csv',header=None)
             #CARER
             dataset_dict['CARER'] = {}
             dataset_dict['CARER']['train'] = pd.read_csv('CARER/train.csv')
@@ -130,8 +130,8 @@ class DataLoader:
         if 'polarity' in self.subset:
             #IMDb
             dataset_dict['imdb'] = {}
-            dataset_dict['imdb']['train'] = pd.read_csv('IMDb/train.csv')
-            dataset_dict['imdb']['test'] = pd.read_csv('IMDb/test.csv')
+            dataset_dict['imdb']['train'] = pd.read_csv('imdb/train.csv')
+            dataset_dict['imdb']['test'] = pd.read_csv('imdb/test.csv')
             #YELP
             dataset_dict['yelp'] = {}
             dataset_dict['yelp']['train']  = pd.read_csv('yelp/train.csv')
@@ -146,27 +146,27 @@ class DataLoader:
         os.chdir('../sarcasm')
         if 'sarcasm' in self.subset:
             #SemEval 2018 
-            dataset_dict['semeval_A'] = {}
-            dataset_dict['semeval_B'] = {}
-            dataset_dict['semeval_A']['train'] = pd.read_csv('SemEval/train-taskA.csv',
+            dataset_dict['SemEval_A'] = {}
+            dataset_dict['SemEval_B'] = {}
+            dataset_dict['SemEval_A']['train'] = pd.read_csv('SemEval/train-taskA.csv',
                                     usecols=['Label','Tweet text']).rename(columns = {'Label':'label','Tweet text':'text'})
-            dataset_dict['semeval_B']['train'] = pd.read_csv('SemEval/train-taskB.csv',
+            dataset_dict['SemEval_B']['train'] = pd.read_csv('SemEval/train-taskB.csv',
                                                 usecols=['Label','Tweet text']).rename(columns = {'Label':'label','Tweet text':'text'})
-            dataset_dict['semeval_A']['test'] = pd.DataFrame()
-            dataset_dict['semeval_B']['test'] = pd.DataFrame()
-            dataset_dict['semeval_A']['test']['text'] = pd.read_csv('SemEval/test-taskA.csv',
+            dataset_dict['SemEval_A']['test'] = pd.DataFrame()
+            dataset_dict['SemEval_B']['test'] = pd.DataFrame()
+            dataset_dict['SemEval_A']['test']['text'] = pd.read_csv('SemEval/test-taskA.csv',
                                                 usecols=['tweet text'])
-            dataset_dict['semeval_B']['test']['text'] = pd.read_csv('SemEval/test-taskB.csv',
+            dataset_dict['SemEval_B']['test']['text'] = pd.read_csv('SemEval/test-taskB.csv',
                                                 usecols=['tweet text'])
 
-            dataset_dict['semeval_A']['test']['label'] = pd.read_csv('SemEval/gold_test_taskA_emoji.csv',
+            dataset_dict['SemEval_A']['test']['label'] = pd.read_csv('SemEval/gold_test_taskA_emoji.csv',
                                                 usecols=['Label'])
-            dataset_dict['semeval_B']['test']['label'] = pd.read_csv('SemEval/gold_test_taskB_emoji.csv',
+            dataset_dict['SemEval_B']['test']['label'] = pd.read_csv('SemEval/gold_test_taskB_emoji.csv',
                                                 usecols=['Label'])
             #SARC V1.0 balanced dataset
             dataset_dict['sarc'] = {}
-            dataset_dict['sarc']['train'] = pd.read_csv('SARC/train-balanced.csv')
-            dataset_dict['sarc']['test'] = pd.read_csv('SARC/test-balanced.csv')
+            dataset_dict['sarc']['train'] = pd.read_csv('sarc/train-balanced.csv')
+            dataset_dict['sarc']['test'] = pd.read_csv('sarc/test-balanced.csv')
 
             #iSarcasm
             dataset_dict['iSarcasm'] = {}
