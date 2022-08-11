@@ -36,13 +36,7 @@ class DataLoader:
         #Fake News datasets
         os.chdir('datasets/fake_news')
         if 'fake_news' in self.subset:
-            #Fake and Real News dataset  This dataset has been removed
-            # real_news = pd.read_csv('fake_and_real_news/True.csv',usecols = ['title','text'])
-            # fake_news = pd.read_csv('fake_and_real_news/Fake.csv',usecols = ['title','text'])
-            # real_news['label'] = np.full(shape=(real_news.shape[0],1),fill_value=1)
-            # fake_news['label'] = np.zeros(shape=(fake_news.shape[0],1))
-            # dataset_dict['fake_real_news'] = pd.concat([real_news,fake_news]).reset_index(drop=True)
-            
+            #FakeNewsNet
             if len(os.listdir('FakeNewsNet'))!=0: 
             # The FakeNewsData has been added following the intructions in this repository : https://github.com/KaiDMML/FakeNewsNet 
             #FakeNewsNet Politifact
@@ -50,15 +44,27 @@ class DataLoader:
                 fake_path = "FakeNewsNet/code/fakenewsnet_dataset/politifact/fake/"
                 real_text = self.retrieve_text_path(real_path)
                 fake_text = self.retrieve_text_path(fake_path)    
-                label = [1] * len(real_text) + [0] * len(fake_text)        
-                dataset_dict['politifact'] = pd.DataFrame({'text':real_text+fake_text,'label':label}).reset_index(drop=True)
+                politifact_label = [1] * len(real_text) + [0] * len(fake_text)        
+                dataset_dict['politifact'] = pd.DataFrame({'text':real_text+fake_text,'label':politifact_label}).reset_index(drop=True)
                 #FakeNewsNet GossipCop
                 real_path = "FakeNewsNet/code/fakenewsnet_dataset/gossipcop/real/"
                 fake_path = "FakeNewsNet/code/fakenewsnet_dataset/gossipcop/fake/"
                 real_text = self.retrieve_text_path(real_path)
                 fake_text = self.retrieve_text_path(fake_path)    
-                label = [1] * len(real_text) + [0] * len(fake_text)        
-                dataset_dict['gossipcop'] = pd.DataFrame({'text':real_text+fake_text,'label':label}).reset_index(drop=True)
+                gossipcop_label = [1] * len(real_text) + [0] * len(fake_text)        
+                dataset_dict['gossipcop'] = pd.DataFrame({'text':real_text+fake_text,'label':gossipcop_label}).reset_index(drop=True)
+            #CoAID
+            real = pd.read_csv('CoAID/real.csv')
+            fake = pd.read_csv('CoAID/fake.csv')
+            real_text = real.fillna('').apply(lambda row :  row['content'] if row['content']!='' 
+                                     else row['abstract'] if row['abstract']!=''
+                                     else row['title'],axis=1).to_list()
+            fake_text = fake.fillna('').apply(lambda row :  row['content'] if row['content']!='' 
+                                     else row['abstract'] if row['abstract']!=''
+                                     else row['title'],axis=1).to_list()
+            coaid_label = [1] * len(real_text) + [0] * len(fake_text)  
+            print(len(coaid_label))
+            dataset_dict['CoAID'] = pd.DataFrame({'text':real_text+fake_text,'label':coaid_label}).reset_index(drop=True)
             #LIAR
             dataset_dict['liar'] = {}
             dataset_dict['liar']['train'] = pd.read_csv('liar/train.csv',

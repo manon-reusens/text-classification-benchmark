@@ -29,6 +29,7 @@ if not os.path.exists('datasets'):
     os.makedirs('datasets')
 os.chdir('datasets')
 os.makedirs('fake_news/liar')
+os.makedirs('fake_news/CoAID')
 os.makedirs('fake_news/FakeNewsNet')
 os.makedirs('topic/agnews')
 os.makedirs('topic/yahoo')
@@ -61,7 +62,9 @@ pd.read_table('https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master
 #iSarcasm
 pd.read_csv('https://raw.githubusercontent.com/iabufarha/iSarcasmEval/main/train/train.En.csv').to_csv('sentiment/sarcasm/iSarcasm/train.En.csv',index=False)
 pd.read_csv('https://raw.githubusercontent.com/iabufarha/iSarcasmEval/main/test/task_A_En_test.csv').to_csv('sentiment/sarcasm/iSarcasm/task_A_En_test.csv',index=False)
-print('github okay')
+#CoAID
+pd.read_csv('https://raw.githubusercontent.com/cuilimeng/CoAID/master/05-01-2020/NewsFakeCOVID-19.csv').to_csv('fake_news/CoAID/Fake.csv',index=False)
+real = pd.read_csv('https://raw.githubusercontent.com/cuilimeng/CoAID/master/05-01-2020/NewsRealCOVID-19.csv').to_csv('fake_news/CoAID/Real.csv',index=False)
 #Archives
 #SARC
 pd.read_csv('https://nlp.cs.princeton.edu/SARC/1.0/main/test-balanced.csv.bz2',sep='\t',compression='bz2',header=None,usecols=[0,1]).rename(columns={0:'label',1:'text'}).to_csv('sentiment/sarcasm/sarc/test-balanced.csv',index=False)
