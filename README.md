@@ -26,7 +26,7 @@ Instructions for datasets collection :
 | --- | --- |  --- | --- | --- |
 | FakeNewsNet - Politifact | Fake News | 2 | 1056  | None (80% Train - 20% Test in paper) |
 | FakeNewsNet - GossipCop | Fake News |2 | 18590 | None (80% Train - 20% Test in paper) | 
-| CoAID | Fake News | 2 |  3669     | None (75% Train - 20% Test in paper) |
+| CoAID | Fake News | 2 |  3669     | None (75% Train - 25% Test in paper) |
 | LIAR | Fake News | 6 | 12836 | Train-Val-Test |
 | 20News | Topic | 20 | 18846 | Train-Test |
 | AGNews | Topic | 4 | 127600 | Train-Test |
