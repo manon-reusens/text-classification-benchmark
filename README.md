@@ -9,6 +9,7 @@
 * util/datasplitter.py : splits a dataset into its train-(val)-test set components
 * data_collection.py :  collect datasets from the web and store them as csv files
 * evaluator.py : fits a model on the train data and evaluates it on the test set
+* run.py : main script, conducts an evaluation of all models accross all tasks
 
 
 ## Datasets
