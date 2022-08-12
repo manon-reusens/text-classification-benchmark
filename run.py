@@ -19,6 +19,13 @@ SEED=42
 def run_task(task, 
              save_model=True,
              track_carbon=False):
+    '''
+    Train and evaluates all models on all datasets for a particular task. 
+    Args:
+        task (str): the selected task, can be any of ['fake_news','topic','emotion','polarity','sarcasm']
+        save_model (bool): if True, saves the trained models as .sav files with pickle.
+        track_carbon (bool): if True, activates a carbon tracker while training the models 
+    '''
     #Load data
     dl = DataLoader([task])
     task_data = dl.load()
@@ -30,7 +37,8 @@ def run_task(task,
     fasttext.load_model('fasttext/cc.en.300.bin')
 
     for k in task_data.keys():
-        if k in ['SemEval_A','SemEval_B','iSarcasm','tweetEval']: #Tweet datasets
+        #Iterate through all the datasets for the specified task
+        if k in ['SemEval_A','SemEval_B','iSarcasm','tweetEval']: #Tweet datasets require tweet preprocessor
             train, _ , test = data_splitter(task_data[k],tweet_preprocessor,
                                             create_val_set=True,seed=SEED)
         else:
@@ -59,3 +67,7 @@ if __name__=='__main__':
         os.makedirs('output')
 
     run_task('fake_news')
+    # run_task('topic')
+    # run_task('emotion')
+    # run_task('polarity')
+    # run_task('sarcasm')

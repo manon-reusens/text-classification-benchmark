@@ -14,7 +14,7 @@ class DataLoader:
         Param : 
             subset (list) : task-related subsets to select
         Output :
-            a dictionary with the name of the dataset as key and the corresponding dataframe as value.
+            a dictionary with the names of the datasets as keys and the corresponding dataframes as values.
         '''
         self.subset = subset
 
@@ -179,6 +179,8 @@ class DataLoader:
             dataset_dict['iSarcasm']['train'] = pd.read_csv('iSarcasm/train.En.csv',
                                                              usecols=['tweet','sarcastic']).rename(columns={'tweet':'text','sarcastic':'label'})
             dataset_dict['iSarcasm']['test'] = pd.read_csv('iSarcasm/task_A_En_test.csv').rename(columns={'sarcastic':'label'})
-        os.chdir('../../..') #Return to home directory
+
+        #Return to home directory
+        os.chdir('../../..') 
         
         return dataset_dict

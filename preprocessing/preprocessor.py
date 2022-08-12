@@ -2,7 +2,6 @@
 from nltk.tokenize import word_tokenize, TweetTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from nltk import download
 import re
 from time import time
 import emoji 
@@ -54,7 +53,6 @@ class Preprocessor:
         else:
             return word_tokenize(text)
 
-
     def drop_digits(self,text):
         #Remove numbers from tokenized text
         text = [word for word in text if not word.isdigit()]
@@ -62,7 +60,8 @@ class Preprocessor:
 
     def drop_emojis(self,text):
         #Remove (sequence of) emojis from tokenized text
-        text = [word for word in text if word[0] not in self.emojis] #If there is more than one emoji in the word token, just check the first one
+        text = [word for word in text if word[0] not in self.emojis] 
+        #If there is more than one emoji in the word token, just check the first one
         return text
         
     def drop_stopwords(self,text):

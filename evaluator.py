@@ -20,7 +20,7 @@ def evaluate_classifier(clf,
   '''
   Evaluate a model on the test set after fitting it on the train set.
   Args:
-    clf (object) : the classifier to use
+    clf (object) : the classifier to train and evaluate
     train (pandas.DataFrame) : the train set. It can consist of 2 columns (text and label) or more (embeddings dimensions and label)
     test  (pandas.dataFrame) : the test set. It can consist of 2 columns (text and label) or more (embeddings dimensions and label)
     tfidf (bool) : If True, uses Tf-Idf to vectorizer the input text. Else, uses the provided input embeddings.
@@ -31,7 +31,7 @@ def evaluate_classifier(clf,
     carbon_path (str) : path to the desired location for  the carbon tracker output.
   Returns:
     metrics (dict) : A dictionary of evaluation metrics.
-    predictions (array): An array with the integer prediction on the test set.
+    predictions (numpy.array): An array with the integer prediction on the test set.
   '''
   
   if track_carbon:
@@ -45,25 +45,29 @@ def evaluate_classifier(clf,
     pipe.fit(train['text'],train['label'])
     #Make predictions
     predictions = pipe.predict(test['text'])
-    if type(clf)!=SVC: #SVC does not support probability prediction by default 
+    if type(clf)!=SVC: 
+      #SVC does not support probability prediction by default 
       predictions_proba = pipe.predict_proba(test['text'])[:,1]
   
-  #No vectorization needed (e.g. text is already converted to embeddings)
+  #Embedding pipeline
   else:
     try:
       pipe = Pipeline([('clf',clf)])
       pipe.fit(train.drop(columns=['label']),train['label'])
+      #Make predictions
       predictions = pipe.predict(test.drop(columns=['label']))
-      if type(clf)!=SVC:
-        predictions_proba = pipe.predict_proba(test.drop(columns=['label']))[:,1]
+      #SVC does not support probability prediction by default
+      predictions_proba = pipe.predict_proba(test.drop(columns=['label']))[:,1]
     except:
       raise ValueError('Invalid input format.')
 
   #Evaluate
+  #Currently the following metrics are included : Accuracy, Macro F1, AUC PC, AUC ROC
   metrics = {}
   metrics['Accuracy'] = accuracy_score(test['label'],predictions)
   metrics['Macro F1'] = f1_score(test['label'],predictions,average='macro')
-  if test['label'].nunique() <= 2 and type(clf)!=SVC: #Binary only metrics
+  if test['label'].nunique() <= 2 and type(clf)!=SVC: 
+    #No AUC for multiclass datasets and for SVC models
     metrics['AUC PC'] =  average_precision_score(test['label'],predictions_proba)
     metrics['AUC ROC'] = roc_auc_score(test['label'],predictions_proba)
   else:
@@ -95,8 +99,7 @@ def get_summary_dataset(name,
                         track_carbon=False,
                         save_model=True):
   '''
-  Stores all predictions and evaluation metrics for a dataset and a selected number of models
-  versions are evaluated.
+  Stores all predictions and evaluation metrics for set of models applied to one dataset
   Args:
    name (str) : the name of the dataset, used for the output files path
    train (pandas.DataFrame): the train set in non-embedded format
@@ -106,14 +109,21 @@ def get_summary_dataset(name,
    models_dict (dict): a dictionary with the model acronyme as key (e.g. 'tfidf_lr ,'ft_rf') and the corresponding sklearn model as value          
    to_csv (bool): if True, saves the predictions and metrics DataFrames to csv
    track_carbon (bool) : If True, tracks the carbon emissions while executing the function.
-   save_model (bool) : If True, saves the model to the desired folder
+   save_model (bool) : If True, saves the model as a .sav file
   Returns:
     metrics_df (pandas.DataFrame): a DataFrame with metrics as rows and models as columns
     preds_df (pandas.DataFrame) : a DataFrame with the predictions for all the models
   '''
-
+  
+  #Create missing directories
   if not os.path.isdir('models'):
       os.makedirs('models')
+  if not os.path.isdir('output/metrics'):
+      os.makedirs('output/metrics')
+  if not os.path.isdir('output/predictions'):
+      os.makedirs('output/predictions')
+  
+  #Initialize results dataframes
   metrics_df=pd.DataFrame()
   preds_df=pd.DataFrame({'label':test['label']})
   for k in models_dict.keys():
@@ -122,18 +132,16 @@ def get_summary_dataset(name,
     if 'tfidf' in k:
       #The classifier requires tf-idf preprocessing
       metrics_tfidf, preds_df[k] = evaluate_classifier(models_dict[k],train,test, tfidf=True,
-                                                      save_model=save_model,track_carbon=track_carbon, model_path='models/'+name+'/'+k+'.sav')
+                                                       save_model=save_model,track_carbon=track_carbon, 
+                                                       model_path='models/'+name+'/'+k+'.sav')
       metrics_df[k] = metrics_tfidf.values()
     else:
       #The classifier does not require tf-idf preprocessing (e.g. fasttext or deep learning)
       metrics_emb, preds_df[k] = evaluate_classifier(models_dict[k],embedded_train,embedded_test, tfidf=False,
-                                                save_model=save_model, track_carbon=track_carbon, model_path='models/'+name+'/'+k+'.sav')
+                                                     save_model=save_model, track_carbon=track_carbon,
+                                                     model_path='models/'+name+'/'+k+'.sav')
       metrics_df[k] = metrics_emb.values()
       
-  if not os.path.isdir('output/metrics'):
-      os.makedirs('output/metrics')
-  if not os.path.isdir('output/predictions'):
-      os.makedirs('output/predictions')
   if to_csv:
     metrics_df.rename(index={0:'Accuracy',1:'F1 Macro',2:'AUC PC',3: 'AUC ROC'}).to_csv('output/metrics/'+name+'.csv')
     preds_df.to_csv('output/predictions/'+name+'.csv',index=False) 
