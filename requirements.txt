@@ -11,4 +11,5 @@ scikit-learn=1.0.2
 shap=0.39.0
 tqdm=4.64.0
 wandb=0.12.21
+xgboost=1.4.2
 yaml=6.0
