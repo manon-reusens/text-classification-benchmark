@@ -9,17 +9,18 @@
 * util/datasplitter.py : splits a dataset into its train-(val)-test set components
 * data_collection.py :  collect datasets from the web and store them as csv files
 * evaluator.py : fits a model on the train data and evaluates it on the test set
+* run.py : main script, conducts an evaluation of all models accross all tasks
 
 
-## Datasets
-
+## How to use
 Instructions for datasets collection : 
 
 1. Run 'data_collection.py'. This will download all datasets except FakeNewsNet.
 2. Clone the [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) repository in datasets/fake_news/FakeNewsBet
 3. Follow the data collection instructions in the readm file of FakeNewsNet
+4.Execute 'run.py' to get the trained models and evaluation metrics reported in the paper
 
-
+## Datasets
 ### Structure of the datasets
 
 | Dataset | Task |  Classes  | Size |  Split |
