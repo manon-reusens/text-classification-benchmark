@@ -11,13 +11,21 @@
 * evaluator.py : fits a model on the train data and evaluates it on the test set
 * run.py : main script, conducts an evaluation of all models accross all tasks
 
+## Installation
+
+Experiments are conducted with Python 3.9.
+```
+$ conda create --name TextBenchmark python=3.9
+$ conda activate TextBenchmark
+$ pip install -r requirements.txt
+```
 
 ## How to use
 Instructions for datasets collection : 
 
 1. Run 'data_collection.py'. This will download all datasets except FakeNewsNet.
 2. Clone the [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) repository in datasets/fake_news/FakeNewsBet
-3. Follow the data collection instructions in the readm file of FakeNewsNet
+3. Follow the data collection instructions in the readme file of FakeNewsNet
 4.Execute 'run.py' to get the trained models and evaluation metrics reported in the paper
 
 ## Datasets
