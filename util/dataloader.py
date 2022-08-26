@@ -6,16 +6,13 @@ from tqdm import tqdm
 from sklearn.datasets import fetch_20newsgroups
 
 class DataLoader:
-
+    '''
+    Loads all required datasets as pandas dataframes.
+    Attributes : 
+        subset (list) : task-related subsets to select
+    '''
     def __init__(self,
                  subset=['fake_news','topic','emotion','polarity','sarcasm']):
-        '''
-        Loads all required datasets as pandas dataframes.
-        Param : 
-            subset (list) : task-related subsets to select
-        Output :
-            a dictionary with the names of the datasets as keys and the corresponding dataframes as values.
-        '''
         self.subset = subset
 
 
