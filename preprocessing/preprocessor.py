@@ -8,22 +8,20 @@ import emoji
 
 
 class Preprocessor:
+    '''
+    The Preprocessor is used to convert raw text data  to a suitable format
+    Attributes:
+        is_tweet (bool) : If True, uses the TweetTokenizer to tokenize the text. If False, uses the standard word_tokenize method of nltk
+        lemmatizer (object) : the desired nltk lemmatizer object
+        stopwords (list) : a list of stopwords  to drop from the text
+        emojis (list) : a list of emojis to drop from the text
+    '''
 
     def __init__(self,
                  is_tweet=False,
                  lemmatizer = WordNetLemmatizer(),
                  stopwords = stopwords.words('english'),
                  emojis = emoji.UNICODE_EMOJI_ENGLISH):
-        '''
-        The Preprocessor is used to convert raw text data  to a suitable format
-        Args:
-            is_tweet (bool) : If True, uses the TweetTokenizer to tokenize the text. If False, uses the standard word_tokenize method of nltk
-            lemmatizer (object) : the desired nltk lemmatizer object
-            stopwords (list) : a list of stopwords  to drop from the text
-            emojis (list) : a list of emojis to drop from the text
-        Output :
-            corpus (list) : a list of processed text
-        '''
 
         self.is_tweet = is_tweet
         self.lemmatizer = lemmatizer
