@@ -33,7 +33,6 @@ Instructions for datasets collection :
 
 | Dataset | Task |  Classes  | Size |  Split |
 | --- | --- |  --- | --- | --- |
-| FakeNewsNet - Politifact | Fake News | 2 | 1056  | None (80% Train - 20% Test in paper) |
 | FakeNewsNet - GossipCop | Fake News |2 | 18590 | None (80% Train - 20% Test in paper) | 
 | CoAID | Fake News | 2 |  3669     | None (75% Train - 25% Test in paper) |
 | LIAR | Fake News | 6 | 12836 | Train-Val-Test |
