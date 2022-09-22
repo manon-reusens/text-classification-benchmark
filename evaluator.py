@@ -5,7 +5,6 @@ import os
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
-from sklearn.svm import SVC
 from codecarbon import EmissionsTracker
 
 def evaluate_classifier(clf,
@@ -45,9 +44,7 @@ def evaluate_classifier(clf,
     pipe.fit(train['text'],train['label'])
     #Make predictions
     predictions = pipe.predict(test['text'])
-    if type(clf)!=SVC: 
-      #SVC does not support probability prediction by default 
-      predictions_proba = pipe.predict_proba(test['text'])[:,1]
+    predictions_proba = pipe.predict_proba(test['text'])[:,1]
   
   #Embedding pipeline
   else:
@@ -56,7 +53,6 @@ def evaluate_classifier(clf,
       pipe.fit(train.drop(columns=['label']),train['label'])
       #Make predictions
       predictions = pipe.predict(test.drop(columns=['label']))
-      #SVC does not support probability prediction by default
       predictions_proba = pipe.predict_proba(test.drop(columns=['label']))[:,1]
     except:
       raise ValueError('Invalid input format.')
@@ -66,7 +62,7 @@ def evaluate_classifier(clf,
   metrics = {}
   metrics['Accuracy'] = accuracy_score(test['label'],predictions)
   metrics['Macro F1'] = f1_score(test['label'],predictions,average='macro')
-  if test['label'].nunique() <= 2 and type(clf)!=SVC: 
+  if test['label'].nunique() <= 2: 
     #No AUC for multiclass datasets and for SVC models
     metrics['AUC PC'] =  average_precision_score(test['label'],predictions_proba)
     metrics['AUC ROC'] = roc_auc_score(test['label'],predictions_proba)
