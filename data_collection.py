@@ -15,13 +15,10 @@ def huggingface_to_csv(name,
         output_path: the path to the location where the csv file needs to be stored
     '''
     dataset = load_dataset(name,subset)
+    pd.DataFrame(dataset['train']).to_csv(output_path + 'train.csv',index=False)
+    pd.DataFrame(dataset['test']).to_csv(output_path + 'test.csv',index=False)
     if 'validation' in  dataset.keys():
-        pd.DataFrame(dataset['train']).to_csv(output_path + 'train.csv',index=False)
         pd.DataFrame(dataset['validation']).to_csv(output_path + 'val.csv',index=False)
-        pd.DataFrame(dataset['test']).to_csv(output_path + 'test.csv',index=False)
-    else :
-        pd.DataFrame(dataset['train']).to_csv(output_path + 'train.csv',index=False)
-        pd.DataFrame(dataset['test']).to_csv(output_path + 'test.csv',index=False)
 
 
 
@@ -54,17 +51,27 @@ pd.read_table('https://raw.githubusercontent.com/cardiffnlp/tweeteval/main/datas
 pd.read_table('https://raw.githubusercontent.com/cardiffnlp/tweeteval/main/datasets/emotion/test_labels.txt').to_csv('sentiment/emotion/tweetEval/test_labels.csv',index=False)
 #SemEval
 pd.read_table('https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master/datasets/train/SemEval2018-T3-train-taskA.txt').to_csv('sentiment/sarcasm/SemEval/train-taskA.csv',index=False)
-pd.read_table('https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master/datasets/train/SemEval2018-T3-train-taskB.txt').to_csv('sentiment/sarcasm/SemEval/train-taskB.csv',index=False)
+# pd.read_table('https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master/datasets/train/SemEval2018-T3-train-taskB.txt').to_csv('sentiment/sarcasm/SemEval/train-taskB.csv',index=False)
 pd.read_table('https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master/datasets/test_TaskA/SemEval2018-T3_input_test_taskA.txt').to_csv('sentiment/sarcasm/SemEval/test-taskA.csv',index=False)
-pd.read_table('https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master/datasets/test_TaskB/SemEval2018-T3_input_test_taskB.txt').to_csv('sentiment/sarcasm/SemEval/test-taskB.csv',index=False)
+# pd.read_table('https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master/datasets/test_TaskB/SemEval2018-T3_input_test_taskB.txt').to_csv('sentiment/sarcasm/SemEval/test-taskB.csv',index=False)
 pd.read_table('https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master/datasets/goldtest_TaskA/SemEval2018-T3_gold_test_taskA_emoji.txt').to_csv('sentiment/sarcasm/SemEval/gold_test_taskA_emoji.csv',index=False)
-pd.read_table('https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master/datasets/goldtest_TaskB/SemEval2018-T3_gold_test_taskB_emoji.txt').to_csv('sentiment/sarcasm/SemEval/gold_test_taskB_emoji.csv',index=False)
+# pd.read_table('https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master/datasets/goldtest_TaskB/SemEval2018-T3_gold_test_taskB_emoji.txt').to_csv('sentiment/sarcasm/SemEval/gold_test_taskB_emoji.csv',index=False)
 #iSarcasm
 pd.read_csv('https://raw.githubusercontent.com/iabufarha/iSarcasmEval/main/train/train.En.csv').to_csv('sentiment/sarcasm/iSarcasm/train.En.csv',index=False)
 pd.read_csv('https://raw.githubusercontent.com/iabufarha/iSarcasmEval/main/test/task_A_En_test.csv').to_csv('sentiment/sarcasm/iSarcasm/task_A_En_test.csv',index=False)
 #CoAID
-pd.read_csv('https://raw.githubusercontent.com/cuilimeng/CoAID/master/05-01-2020/NewsFakeCOVID-19.csv').to_csv('fake_news/CoAID/Fake.csv',index=False)
-real = pd.read_csv('https://raw.githubusercontent.com/cuilimeng/CoAID/master/05-01-2020/NewsRealCOVID-19.csv').to_csv('fake_news/CoAID/Real.csv',index=False)
+fake1 = pd.read_csv('https://raw.githubusercontent.com/cuilimeng/CoAID/master/05-01-2020/NewsFakeCOVID-19.csv')
+real1 = pd.read_csv('https://raw.githubusercontent.com/cuilimeng/CoAID/master/05-01-2020/NewsRealCOVID-19.csv')
+fake2 = pd.read_csv('https://raw.githubusercontent.com/cuilimeng/CoAID/master/07-01-2020/NewsFakeCOVID-19.csv')
+real2 = pd.read_csv('https://raw.githubusercontent.com/cuilimeng/CoAID/master/07-01-2020/NewsRealCOVID-19.csv')
+fake3 = pd.read_csv('https://raw.githubusercontent.com/cuilimeng/CoAID/master/09-01-2020/NewsFakeCOVID-19.csv')
+real3 = pd.read_csv('https://raw.githubusercontent.com/cuilimeng/CoAID/master/09-01-2020/NewsRealCOVID-19.csv')
+fake4 = pd.read_csv('https://raw.githubusercontent.com/cuilimeng/CoAID/master/11-01-2020/NewsFakeCOVID-19.csv')
+real4 = pd.read_csv('https://raw.githubusercontent.com/cuilimeng/CoAID/master/11-01-2020/NewsRealCOVID-19.csv')
+fake = pd.concat([fake1,fake2,fake3,fake4],ignore_index=True)
+real = pd.concat([real1,real2,real3,real4],ignore_index=True)
+fake.to_csv('fake_news/CoAID/Fake.csv',index=False)
+real.to_csv('fake_news/CoAID/Real.csv',index=False)
 #Archives
 #SARC
 pd.read_csv('https://nlp.cs.princeton.edu/SARC/1.0/main/test-balanced.csv.bz2',sep='\t',compression='bz2',header=None,usecols=[0,1]).rename(columns={0:'label',1:'text'}).to_csv('sentiment/sarcasm/sarc/test-balanced.csv',index=False)
