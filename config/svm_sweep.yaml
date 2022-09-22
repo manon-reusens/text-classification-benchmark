@@ -15,7 +15,8 @@ parameters:
         distribution: uniform   #Many distributions available : https://docs.wandb.ai/guides/sweeps/configuration#distribution
     kernel:
         values: ['linear','rbf']
-
+    probability:
+        value: True
     random_state:
         value: 42
 
