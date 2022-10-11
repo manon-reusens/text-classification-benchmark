@@ -72,7 +72,7 @@ best_params['CARER'] = {'tfidf_lr':LogisticRegression(C=8.9,random_state=SEED),
                      'ft_xgb':XGBClassifier(gamma=0.982,learning_rate=0.0833,max_depth=6,n_estimators=101,random_state=SEED)
                            }
 
-#to do : xgb ft
+#Done
 best_params['silicone'] = {'tfidf_lr':LogisticRegression(C=6.277,random_state=SEED),
                      'ft_lr':LogisticRegression(C=8.173,random_state=SEED),
                      'tfidf_rf':RandomForestClassifier(n_estimators=93,max_features='sqrt',random_state=SEED),
@@ -138,7 +138,7 @@ best_params['SemEvalA'] = {'tfidf_lr':LogisticRegression(C=1.898,random_state=SE
                      'ft_xgb':XGBClassifier(gamma=0.9532,learning_rate=0.0551,max_depth=5,n_estimators=67,random_state=SEED)
                       }
 
-#to do all (see google colab)
+#to do : svm and rf (colab)
 best_params['SARC'] = {'tfidf_lr':LogisticRegression(C=1.4,random_state=SEED),
                      'ft_lr':LogisticRegression(C=4.754,random_state=SEED),
                      'tfidf_rf':RandomForestClassifier(random_state=SEED),
@@ -160,15 +160,15 @@ best_params['twentynews'] = {'tfidf_lr':LogisticRegression(C=3.86,random_state=S
                      'ft_xgb':XGBClassifier(gamma=0.6993,learning_rate=0.06194,max_depth=8,n_estimators=120,random_state=SEED)
                       }
 
-#to do XGB
+#Done
 best_params['agnews'] = {'tfidf_lr':LogisticRegression(C=1.114,random_state=SEED),
                      'ft_lr':LogisticRegression(C=3.741,random_state=SEED),
                      'tfidf_rf':RandomForestClassifier(n_estimators=188,max_features='log2',random_state=SEED),
                      'ft_rf':RandomForestClassifier(n_estimators=167,max_features='log2',random_state=SEED),
                      'tfidf_svm':LinearSVC(C=1.843,loss='hinge',random_state=SEED),
                      'ft_svm':LinearSVC(C=9.337,loss='hinge',random_state=SEED),
-                     'tfidf_xgb':XGBClassifier(gamma=,learning_rate=,max_depth=,n_estimators=,random_state=SEED),
-                     'ft_xgb':XGBClassifier(gamma=,learning_rate=,max_depth=,n_estimators=,random_state=SEED)
+                     'tfidf_xgb':XGBClassifier(gamma=0.1168,learning_rate=0.08735,max_depth=10,n_estimators=138,random_state=SEED),
+                     'ft_xgb':XGBClassifier(gamma=0.699,learning_rate=0.06413,max_depth=9,n_estimators=139,random_state=SEED)
                       }
 
 #to do : rf, svc, xgb
