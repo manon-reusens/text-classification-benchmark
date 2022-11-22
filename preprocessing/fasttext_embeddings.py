@@ -31,15 +31,12 @@ class FastTextEmbeddings:
         fasttext_text_av=[]
         print('Starting to generate sentence embeddings')
         for i in tqdm(corpus.index):
-            sentence_emb=[]          
-            if type(corpus[i])== float:
-                sentence_emb.append([0] * 300)
-            else:
-                for word in corpus[i].split():
-                        sentence_emb.append(self.model.get_word_vector(word))
-            avg = [float(sum(col))/len(col) for col in zip(*sentence_emb)]
-            fasttext_text_av.append(avg) 
 
-        embedded_corpus=pd.DataFrame(fasttext_text_av).fillna(0)
+            if type(corpus[i])== float:
+                fasttext_text_emb.append([0] * 300)
+            else:
+                fasttext_text_emb.append(self.model.get_sentence_vector(corpus[i]))
+
+        embedded_corpus=pd.DataFrame(fasttext_text_emb).fillna(0)
         
         return embedded_corpus
