@@ -144,8 +144,8 @@ class DataLoader:
             #SST2
             dataset_dict['sst2'] = {}
             dataset_dict['sst2']['train'] = pd.read_csv('sst2/train.csv',usecols=['sentence','label']).rename(columns={'sentence':'text'})
-            dataset_dict['sst2']['val'] = pd.read_csv('sst2/val.csv',usecols=['sentence','label']).rename(columns={'sentence':'text'})
-            dataset_dict['sst2']['test'] = pd.read_csv('sst2/test.csv',usecols=['sentence','label']).rename(columns={'sentence':'text'})
+            dataset_dict['sst2']['test'] = pd.read_csv('sst2/val.csv',usecols=['sentence','label']).rename(columns={'sentence':'text'}) #we will use the development set as test set
+            #dataset_dict['sst2']['test'] = pd.read_csv('sst2/test.csv',usecols=['sentence','label']).rename(columns={'sentence':'text'})
 
         #Sentiment Analysis 3: Sarcasm
         os.chdir('../sarcasm')
