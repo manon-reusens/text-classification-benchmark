@@ -1,21 +1,21 @@
-method: random   #Available options : [grid, random, bayes]
+method: bayes   #Available options : [grid, random, bayes]
 entity: benchmark-nlp 
 project: hyperopt
 metric:
     #Metric is only relevant for bayesian search
-    name: loss
-    goal: minimize
+    name: f1_macro
+    goal: maximize
 
 parameters: 
     #Describe parameters here : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
-    
     n_estimators:
-        min: 10    
+        min: 1    
         max: 200
         distribution: int_uniform   #Many distributions available : https://docs.wandb.ai/guides/sweeps/configuration#distribution
     max_features:
-        values: ['log2','sqrt']
-    
+        min: 1
+        max: 20
+        distribution: int_uniform
     random_state:
         value: 42
 

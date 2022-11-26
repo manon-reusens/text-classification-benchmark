@@ -1,30 +1,31 @@
-method: random   #Available options : [grid, random, bayes]
+method: bayes   #Available options : [grid, random, bayes]
 entity: benchmark-nlp 
 project: hyperopt
 metric:
     #Metric is only relevant for bayesian search
-    name: loss
-    goal: minimize
+    name: f1_macro
+    goal: maximize
 
 parameters: 
     #Describe parameters here : https://xgboost.readthedocs.io/en/stable/parameter.html
-    
-    gamma:
-        min: 0
-        max: 1
-        distribution: uniform
-    n_estimators:
-        min: 10
-        max: 150
-        distribution: int_uniform
     learning_rate:
-        min: 0.001
-        max: 0.1
+        values: [0.0001, 0.001,0.01,0.1]
+    gamma:
+        min: 1
+        max: 10
         distribution: uniform
     max_depth:
-        min: 0
-        max: 10
-        distribution: int_uniform    
+        min: 3
+        max: 7
+        distribution: int_uniform
+    n_estimators:
+        min: 1000 
+        max: 10000
+        distribution: int_uniform
+    colsample_bytree:
+        min: 0.1
+        max: 1
+        distribution: uniform
     random_state:
         value: 42
 
