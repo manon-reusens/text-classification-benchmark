@@ -1,6 +1,6 @@
 method: bayes   #Available options : [grid, random, bayes]
 entity: benchmark-nlp 
-project: hyperopt
+project: bayes_lr
 metric:
     #Metric is only relevant for bayesian search
     name: f1_macro
