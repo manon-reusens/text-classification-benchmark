@@ -54,8 +54,8 @@ class DataLoader:
                 gossipcop_label = [1] * len(real_text) + [0] * len(fake_text)        
                 dataset_dict['gossipcop'] = pd.DataFrame({'text':real_text+fake_text,'label':gossipcop_label}).reset_index(drop=True)
             #CoAID
-            real = pd.read_csv('CoAID/real.csv')
-            fake = pd.read_csv('CoAID/fake.csv')
+            real = pd.read_csv('CoAID/Real.csv')
+            fake = pd.read_csv('CoAID/Fake.csv')
             real_text = real.fillna('').apply(lambda row :  row['content'] if row['content']!='' 
                                      else row['abstract'] if row['abstract']!=''
                                      else row['title'],axis=1).to_list()
