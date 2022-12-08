@@ -1,0 +1,28 @@
+method: bayes   #Available options : [grid, random, bayes]
+entity: benchmark-nlp 
+project: bayes_lstm
+metric:
+    name: f1_score
+    goal: maximize
+
+parameters: 
+    #Describe parameters here
+    optimizer:
+        value: 'adam'
+    learning_rate:
+        values: [0.0001, 0.001, 0.01]
+    hidden_layer_size:
+        values: [128, 256, 512]
+    batch_size:
+        values:  [64, 128, 256, 512, 1024, 2048] #groter omdat als het kleiner is dan gaat de gradient alle kanten uit
+    epochs:
+        value: 100 #langer runnen
+    hidden_layers:
+        value: 1
+    drop_out:
+        value: 0.5
+
+    #no regularizers, cause too many variables then
+early_terminate:
+    type: hyperband
+    min_iter: 1
