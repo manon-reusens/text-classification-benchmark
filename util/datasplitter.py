@@ -1,4 +1,5 @@
 #Import packages
+#Import packages
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from preprocessing.preprocessor import Preprocessor
@@ -24,7 +25,8 @@ def data_splitter(dataset,
     splits (tuple): tuple containing two (train-test) or three (train-val-test) datasets, all of which are pandas.DataFrame.
   '''
   if type(dataset) != dict : #The dataset has no split yet (e.g. gossipcop,politifact)
-    dataset['text'] = preprocessor.preprocess(dataset)
+    if preprocessor !=0:
+        dataset['text'] = preprocessor.preprocess(dataset)
     #Call the sklearn train_test_split function
     train, test = train_test_split(dataset,
                                     test_size=test_split,
@@ -39,10 +41,16 @@ def data_splitter(dataset,
 
   else: #The dataset consists of separate files for train-(val)-test
     train = pd.DataFrame()
-    train['text'] = preprocessor.preprocess(dataset['train'])
+    if preprocessor!=0:
+        train['text'] = preprocessor.preprocess(dataset['train'])
+    else:
+        train['text']=dataset['train']['text']
     train['label'] = dataset['train']['label']
     test = pd.DataFrame()
-    test['text'] = preprocessor.preprocess(dataset['test'])
+    if preprocessor!=0:
+        test['text'] = preprocessor.preprocess(dataset['test'])
+    else:
+        test['text']= dataset['test']['text']
     test['label'] = dataset['test']['label']
     try:
       if create_val_set: 
@@ -50,7 +58,10 @@ def data_splitter(dataset,
         if 'validation' in dataset.keys() or 'val' in dataset.keys():
           #The validation set exists already as a separate file
           val = pd.DataFrame()
-          val['text'] = preprocessor.preprocess(dataset['val'])
+          if preprocessor!=0:
+              val['text'] = preprocessor.preprocess(dataset['val'])
+          else:
+              val['text']=dataset['val']['text']
           val['label'] = dataset['val']['label']
         else:
           #The validation set does not pre-exist and needs to be split from the train set
