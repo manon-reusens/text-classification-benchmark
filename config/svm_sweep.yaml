@@ -16,3 +16,6 @@ parameters:
         value: 'balanced'
     random_state:
         value: 42
+early_terminate:
+    type: hyperband
+    min_iter: 1
