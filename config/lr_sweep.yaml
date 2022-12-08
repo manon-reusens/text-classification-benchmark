@@ -18,4 +18,7 @@ parameters:
         value: 42
     class_weights:
         value: 'balanced'
+early_terminate:
+    type: hyperband
+    min_iter: 1
 
