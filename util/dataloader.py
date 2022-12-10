@@ -98,9 +98,9 @@ class DataLoader:
             dataset_dict['yahoo'] = {}
             col_dict = {'topic':'label','question_title':'title','question_content':'question','best_answer':'answer'}
             dataset_dict['yahoo']['train'] = pd.read_csv('yahoo/train.csv').rename(columns=col_dict).fillna(' ')
-            dataset_dict['yahoo']['train']['text'] = dataset_dict['yahoo']['train']['title'] + ' ' + dataset_dict['yahoo']['train']['question']+ ' ' + dataset_dict['yahoo']['train']['answer']
+            dataset_dict['yahoo']['train']['text'] = str(dataset_dict['yahoo']['train']['title']) + ' ' + str(dataset_dict['yahoo']['train']['question'])+ ' ' + str(dataset_dict['yahoo']['train']['answer'])
             dataset_dict['yahoo']['test'] = pd.read_csv('yahoo/test.csv').rename(columns=col_dict).fillna(' ')
-            dataset_dict['yahoo']['test']['text'] = dataset_dict['yahoo']['test']['title'] + ' ' + dataset_dict['yahoo']['test']['question']+ ' ' + dataset_dict['yahoo']['test']['answer']
+            dataset_dict['yahoo']['test']['text'] = str(dataset_dict['yahoo']['test']['title']) + ' ' + str(dataset_dict['yahoo']['test']['question'])+ ' ' + str(dataset_dict['yahoo']['test']['answer'])
             
         #Sentiment Analysis 1 : Emotion
         os.chdir('../sentiment/emotion')
