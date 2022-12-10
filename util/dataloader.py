@@ -171,7 +171,9 @@ class DataLoader:
             #SARC V1.0 balanced dataset
             dataset_dict['sarc'] = {}
             dataset_dict['sarc']['train'] = pd.read_csv('sarc/train-balanced.csv')
+            dataset_dict['sarc']['train']['text']=dataset_dict['sarc']['train']['text'].apply(str)
             dataset_dict['sarc']['test'] = pd.read_csv('sarc/test-balanced.csv')
+            dataset_dict['sarc']['test']['text']=dataset_dict['sarc']['test']['text'].apply(str)
 
             #iSarcasm
             dataset_dict['iSarcasm'] = {}
