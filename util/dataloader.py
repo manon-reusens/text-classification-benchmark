@@ -177,7 +177,7 @@ class DataLoader:
             dataset_dict['iSarcasm'] = {}
             dataset_dict['iSarcasm']['train'] = pd.read_csv('iSarcasm/train.En.csv',
                                                              usecols=['tweet','sarcastic']).rename(columns={'tweet':'text','sarcastic':'label'})
-            dataset_dict['iSarcasm']['train']['text']= str(dataset_dict['iSarcasm']['train']['text'])
+            dataset_dict['iSarcasm']['train']['text']= dataset_dict['iSarcasm']['train']['text'].apply(str)
             dataset_dict['iSarcasm']['test'] = pd.read_csv('iSarcasm/task_A_En_test.csv').rename(columns={'sarcastic':'label'})
 
         #Return to home directory
