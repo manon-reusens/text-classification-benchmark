@@ -11,7 +11,7 @@ from tensorflow.keras.optimizers import Adam, SGD
 from wandb.keras import WandbCallback
 import pandas as pd
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.callbacks import EarlyStopping, LearningRateScheduler
+from tensorflow.keras.callbacks import EarlyStopping, LearningRateScheduler, ModelCheckpoint
 from sklearn import metrics
 import numpy as np
 import tensorflow as tf
@@ -76,16 +76,16 @@ class Bidirectional_LSTM():
             return lr * tf.math.exp(-0.1)
 
 
-    def compile_and_fit_model(self, model, optimizer, loss= 'categorical_crossentropy', metrics=['accuracy']): # add get_f1 if applicable
+    def compile_and_fit_model(self, model, optimizer,path, run,sweep_id,loss= 'categorical_crossentropy', metrics=['accuracy']): # add get_f1 if applicable
         #compile the model
         model.compile(loss=loss, optimizer=optimizer, metrics=metrics)
         #add model checkpoint and earlystopping
         es= EarlyStopping(monitor='val_loss', verbose=1, patience=10, restore_best_weights=True)
-        #mc = ModelCheckpoint(filepath='best_model.hdf5', monitor='val_loss', mode='min', verbose=1, save_best_only=True, save_freq='epoch')
+        mc = ModelCheckpoint(filepath=path+run.project +'/'+sweep_id+'-model-'+run.name+'.hdf5', monitor='val_loss', mode='min', verbose=1, save_best_only=True, save_freq='epoch')
         LRS = LearningRateScheduler(self.scheduler, verbose=1)
         
         #fit the model
-        model.fit(self.train_text, self.train_label,  validation_data=(self.validation_text, self.validation_label), epochs=self.config['epochs'], callbacks=[WandbCallback(),es, LRS])#add mc if you need that
+        model.fit(self.train_text, self.train_label,  validation_data=(self.validation_text, self.validation_label), epochs=self.config['epochs'], callbacks=[WandbCallback(),es, LRS,mc])#add mc if you need that
         
         
         return model
@@ -135,3 +135,4 @@ class Bidirectional_LSTM():
             aucpc = '-'
             auc = '-'
         return accuracy, f1_score, aucpc, auc
+
