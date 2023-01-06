@@ -2,6 +2,8 @@
 import pandas as pd
 from datasets import load_dataset
 import os
+import urllib.request
+import tarfile
 
 
 def huggingface_to_csv(name, 
@@ -73,6 +75,12 @@ fake = pd.concat([fake1,fake2,fake3,fake4],ignore_index=True)
 real = pd.concat([real1,real2,real3,real4],ignore_index=True)
 fake.to_csv('fake_news/CoAID/Fake.csv',index=False)
 real.to_csv('fake_news/CoAID/Real.csv',index=False)
+#movie_review
+tar_dataset = "https://www.cs.cornell.edu/people/pabo/movie-review-data/rt-polaritydata.tar.gz"
+ftpstream = urllib.request.urlopen(tar_dataset)
+tar_dataset = tarfile.open(fileobj=ftpstream, mode="r|gz")
+tar_dataset.extractall(path='sentiment/polarity/movie_review')
+
 #Archives
 #SARC
 #pd.read_csv('https://nlp.cs.princeton.edu/SARC/1.0/main/test-balanced.csv.bz2',sep='\t',compression='bz2',header=None,usecols=[0,1]).rename(columns={0:'label',1:'text'}).to_csv('sentiment/sarcasm/sarc/test-balanced.csv',index=False)
