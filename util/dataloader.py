@@ -134,10 +134,15 @@ class DataLoader:
             dataset_dict['imdb']['train'] = pd.read_csv('imdb/train.csv')
             dataset_dict['imdb']['test'] = pd.read_csv('imdb/test.csv')
             #movie_review
-            
-            dataset_dict['yelp'] = {}
-            dataset_dict['yelp']['train']  = pd.read_csv('yelp/train.csv')
-            dataset_dict['yelp']['test'] = pd.read_csv('yelp/test.csv')
+            dataset_dict['movie_review']={}
+            with open('movie_review/rt-polarity.pos') as f:
+                positive = [line.rstrip('\n') for line in f]
+
+            with open('movie_review/rt-polarity.neg') as f:
+                negative = [line.rstrip('\n') for line in f]
+            moviereview_label = [1] * len(positive) + [0] * len(negative)
+            dataset_dict['movie_review'] = pd.DataFrame({'text':positive+negative,'label':moviereview_label}).reset_index(drop=True)
+
             #SST2
             dataset_dict['sst2'] = {}
             dataset_dict['sst2']['train'] = pd.read_csv('sst2/train.csv',usecols=['sentence','label']).rename(columns={'sentence':'text'})
