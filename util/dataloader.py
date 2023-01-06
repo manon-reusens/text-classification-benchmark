@@ -4,6 +4,7 @@ import os
 import json
 from tqdm import tqdm
 from sklearn.datasets import fetch_20newsgroups
+from datasets import load_dataset
 
 class DataLoader:
 
@@ -94,14 +95,10 @@ class DataLoader:
             dataset_dict['agnews'] = {}
             dataset_dict['agnews']['train'] = pd.read_csv('agnews/train.csv')
             dataset_dict['agnews']['test'] = pd.read_csv('agnews/test.csv')
-            #Yahoo answers
-            dataset_dict['yahoo'] = {}
-            col_dict = {'topic':'label','question_title':'title','question_content':'question','best_answer':'answer'}
-            dataset_dict['yahoo']['train'] = pd.read_csv('yahoo/train.csv').rename(columns=col_dict).fillna(' ')
-            dataset_dict['yahoo']['train']['text'] = dataset_dict['yahoo']['train']['title'].apply(str) + ' ' + dataset_dict['yahoo']['train']['question'].apply(str)+ ' ' + dataset_dict['yahoo']['train']['answer'].apply(str)
-            dataset_dict['yahoo']['test'] = pd.read_csv('yahoo/test.csv').rename(columns=col_dict).fillna(' ')
-            dataset_dict['yahoo']['test']['text'] = dataset_dict['yahoo']['test']['title'].apply(str) + ' ' + dataset_dict['yahoo']['test']['question'].apply(str)+ ' ' + dataset_dict['yahoo']['test']['answer'].apply(str)
-            
+            #Web Of Science, WOS11967
+            wos= load_dataset('web_of_science',  'WOS11967')['train']
+            dataset_dict['WOS']= pd.DataFrame({'text':wos['input_data'],'label':wos['label_level_1']})
+
         #Sentiment Analysis 1 : Emotion
         os.chdir('../sentiment/emotion')
         if 'emotion' in self.subset:
@@ -168,13 +165,12 @@ class DataLoader:
                                                 usecols=['Label'])
             # dataset_dict['SemEval_B']['test']['label'] = pd.read_csv('SemEval/gold_test_taskB_emoji.csv',
                                                 # usecols=['Label'])
-            #SARC V1.0 balanced dataset
-            dataset_dict['sarc'] = {}
-            dataset_dict['sarc']['train'] = pd.read_csv('sarc/train-balanced.csv')
-            dataset_dict['sarc']['train']['text']=dataset_dict['sarc']['train']['text'].apply(str)
-            dataset_dict['sarc']['test'] = pd.read_csv('sarc/test-balanced.csv')
-            dataset_dict['sarc']['test']['text']=dataset_dict['sarc']['test']['text'].apply(str)
-
+            #Sarcasm_news_headline
+            dataset_dict['SNH'] = {}
+            d=load_dataset('raquiba/Sarcasm_News_Headline')
+            dataset_dict['SNH']['train']=pd.DataFrame({'label':d['train']['is_sarcastic'], 'text':d['train']['headline']})
+            dataset_dict['SNH']['test']=pd.DataFrame({'label':d['test']['is_sarcastic'], 'text':d['test']['headline']})
+            
             #iSarcasm
             dataset_dict['iSarcasm'] = {}
             dataset_dict['iSarcasm']['train'] = pd.read_csv('iSarcasm/train.En.csv',
