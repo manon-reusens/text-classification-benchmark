@@ -4,7 +4,7 @@ import os
 import json
 from tqdm import tqdm
 from sklearn.datasets import fetch_20newsgroups
-from datasets import load_dataset
+
 
 class DataLoader:
 
@@ -96,9 +96,8 @@ class DataLoader:
             dataset_dict['agnews']['train'] = pd.read_csv('agnews/train.csv')
             dataset_dict['agnews']['test'] = pd.read_csv('agnews/test.csv')
             #Web Of Science, WOS11967
-            wos= load_dataset('web_of_science',  'WOS11967')['train']
-            dataset_dict['WOS']= pd.DataFrame({'text':wos['input_data'],'label':wos['label_level_1']})
-
+            dataset_dict['WOS']=pd.read_csv('WOS/WOStrain.csv',usecols=['input_data','label_level_1']).rename(columns={'input_data':'text', 'label_level_1':'label'})
+        
         #Sentiment Analysis 1 : Emotion
         os.chdir('../sentiment/emotion')
         if 'emotion' in self.subset:
@@ -134,7 +133,8 @@ class DataLoader:
             dataset_dict['imdb'] = {}
             dataset_dict['imdb']['train'] = pd.read_csv('imdb/train.csv')
             dataset_dict['imdb']['test'] = pd.read_csv('imdb/test.csv')
-            #YELP
+            #movie_review
+            
             dataset_dict['yelp'] = {}
             dataset_dict['yelp']['train']  = pd.read_csv('yelp/train.csv')
             dataset_dict['yelp']['test'] = pd.read_csv('yelp/test.csv')
@@ -167,9 +167,8 @@ class DataLoader:
                                                 # usecols=['Label'])
             #Sarcasm_news_headline
             dataset_dict['SNH'] = {}
-            d=load_dataset('raquiba/Sarcasm_News_Headline')
-            dataset_dict['SNH']['train']=pd.DataFrame({'label':d['train']['is_sarcastic'], 'text':d['train']['headline']})
-            dataset_dict['SNH']['test']=pd.DataFrame({'label':d['test']['is_sarcastic'], 'text':d['test']['headline']})
+            dataset_dict['SNH']['train']=pd.read_csv('SNH/SNHtrain.csv',usecols=['headline','is_sarcastic']).rename(columns={'headline':'text', 'is_sarcastic':'label'})
+            dataset_dict['SNH']['test']=pd.read_csv('SNH/SNHtest.csv',usecols=['headline','is_sarcastic']).rename(columns={'headline':'text', 'is_sarcastic':'label'})
             
             #iSarcasm
             dataset_dict['iSarcasm'] = {}
