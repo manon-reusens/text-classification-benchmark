@@ -16,7 +16,8 @@ def huggingface_to_csv(name,
     '''
     dataset = load_dataset(name,subset)
     pd.DataFrame(dataset['train']).to_csv(output_path + 'train.csv',index=False)
-    pd.DataFrame(dataset['test']).to_csv(output_path + 'test.csv',index=False)
+    if 'test' in  dataset.keys():
+        pd.DataFrame(dataset['test']).to_csv(output_path + 'test.csv',index=False)
     if 'validation' in  dataset.keys():
         pd.DataFrame(dataset['validation']).to_csv(output_path + 'val.csv',index=False)
 
@@ -74,8 +75,8 @@ fake.to_csv('fake_news/CoAID/Fake.csv',index=False)
 real.to_csv('fake_news/CoAID/Real.csv',index=False)
 #Archives
 #SARC
-pd.read_csv('https://nlp.cs.princeton.edu/SARC/1.0/main/test-balanced.csv.bz2',sep='\t',compression='bz2',header=None,usecols=[0,1]).rename(columns={0:'label',1:'text'}).to_csv('sentiment/sarcasm/sarc/test-balanced.csv',index=False)
-pd.read_csv('https://nlp.cs.princeton.edu/SARC/1.0/main/train-balanced.csv.bz2',sep='\t',compression='bz2',header=None,usecols=[0,1]).rename(columns={0:'label',1:'text'}).to_csv('sentiment/sarcasm/sarc/train-balanced.csv',index=False)
+#pd.read_csv('https://nlp.cs.princeton.edu/SARC/1.0/main/test-balanced.csv.bz2',sep='\t',compression='bz2',header=None,usecols=[0,1]).rename(columns={0:'label',1:'text'}).to_csv('sentiment/sarcasm/sarc/test-balanced.csv',index=False)
+#pd.read_csv('https://nlp.cs.princeton.edu/SARC/1.0/main/train-balanced.csv.bz2',sep='\t',compression='bz2',header=None,usecols=[0,1]).rename(columns={0:'label',1:'text'}).to_csv('sentiment/sarcasm/sarc/train-balanced.csv',index=False)
 
 
 #HuggingFace datasets
@@ -84,9 +85,11 @@ huggingface_to_csv('liar','default','fake_news/liar/')
 huggingface_to_csv('emotion','default','sentiment/emotion/CARER/')
 huggingface_to_csv('imdb','plain_text','sentiment/polarity/imdb/')
 huggingface_to_csv('ag_news','default','topic/agnews/')
-huggingface_to_csv('yahoo_answers_topics','yahoo_answers_topics','topic/yahoo/')
+#huggingface_to_csv('yahoo_answers_topics','yahoo_answers_topics','topic/yahoo/')
 huggingface_to_csv('yelp_polarity','plain_text','sentiment/polarity/yelp/')
 huggingface_to_csv('sst2','default','sentiment/polarity/sst2/')
+huggingface_to_csv('raquiba/Sarcasm_News_Headline', 'default','sentiment/sarcasm/SNH/')
+huggingface_to_csv('web_of_science',  'WOS11967', 'topic/WOS/')
 
 
 #Return to root directory
