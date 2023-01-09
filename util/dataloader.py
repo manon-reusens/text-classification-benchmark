@@ -135,10 +135,10 @@ class DataLoader:
             dataset_dict['imdb']['test'] = pd.read_csv('imdb/test.csv')
             #movie_review
             dataset_dict['movie_review']={}
-            with open('movie_review/rt-polaritydata/rt-polarity.pos') as f:
+            with open('movie_review/rt-polaritydata/rt-polarity.pos', encoding= 'ISO-8859-1') as f:
                 positive = [line.rstrip('\n') for line in f]
 
-            with open('movie_review/rt-polaritydata/rt-polarity.neg') as f:
+            with open('movie_review/rt-polaritydata/rt-polarity.neg', encoding= 'ISO-8859-1') as f:
                 negative = [line.rstrip('\n') for line in f]
             moviereview_label = [1] * len(positive) + [0] * len(negative)
             dataset_dict['movie_review'] = pd.DataFrame({'text':positive+negative,'label':moviereview_label}).reset_index(drop=True)
