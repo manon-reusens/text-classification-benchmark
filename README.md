@@ -38,13 +38,11 @@ Instructions for datasets collection :
 | LIAR | Fake News | 6 | 12836 | Train-Val-Test |
 | 20News | Topic | 20 | 18846 | Train-Test |
 | AGNews | Topic | 4 | 127600 | Train-Test |
-| Yahoo | Topic | 10 | 1460000 | Train-Test |
 | TweetEval Emotion | Emotion | 4 | 5052 | Train-Val-Test |
 | CARER | Emotion | 8 | 20000 | Train-Val-Test |
 | DailyDialog Act - Silicone | Emotion | 7 | 102979 | Train-Val-Test |
 | IMDb | Polarity | 2 | 50000 | Train-Test |
 | Stanford Sentiment Treebank | Polarity | 2 | 68403 |  Train-Val-Test |
-| YELP | Polarity | 2 | 598000 | Train-Test |
 | SemEval Task 3 | Sarcasm | 2(4) | 4601 | Train-Test |
 | SARC | Sarcasm | 2 | 1409012 | Train-Test |
 |iSarcasm - English | Sarcasm | 2 | 5735 | Train-Test | 
