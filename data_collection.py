@@ -28,27 +28,29 @@ def huggingface_to_csv(name,
 if not os.path.exists('datasets'):
     os.makedirs('datasets')
 os.chdir('datasets')
-if not os.path.exists('fake_news')
-    os.makedirs('fake_news/liar')
-    os.makedirs('fake_news/CoAID')
-    os.makedirs('fake_news/FakeNewsNet')
-if not os.path.exists('topic')
+if not os.path.exists('fake_news'):
+    if not os.path.exists('fake_news/liar'):
+        os.makedirs('fake_news/liar')
+    if not os.path.exists('fake_news/coAID'):
+        os.makedirs('fake_news/CoAID')
+    if not os.path.exists('fake_news/FakeNewsNet'):
+        os.makedirs('fake_news/FakeNewsNet')
+if not os.path.exists('topic'):
     os.makedirs('topic/agnews')
     os.makedirs('topic/WOS')
-if not os.path.exists('sentiment')
-    if not os.path.exists('sentiment/emotion')
+if not os.path.exists('sentiment'):
+    if not os.path.exists('sentiment/emotion'):
       os.makedirs('sentiment/emotion/tweetEval')
       os.makedirs('sentiment/emotion/CARER')
       os.makedirs('sentiment/emotion/silicone')
-    if not os.path.exists('sentiment/polarity')
+    if not os.path.exists('sentiment/polarity'):
       os.makedirs('sentiment/polarity/imdb')
       os.makedirs('sentiment/polarity/movie_review')
       os.makedirs('sentiment/polarity/sst2')
-    if not os.path.exists('sentiment/sarcasm')
+    if not os.path.exists('sentiment/sarcasm'):
       os.makedirs('sentiment/sarcasm/SemEval')
       os.makedirs('sentiment/sarcasm/iSarcasm')
       os.makedirs('sentiment/sarcasm/SNH')
-
 
 #GitHub datasets
 #TweetEval Emotion
