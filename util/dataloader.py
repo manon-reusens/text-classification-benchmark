@@ -172,8 +172,8 @@ class DataLoader:
                                                 # usecols=['Label'])
             #Sarcasm_news_headline
             dataset_dict['SNH'] = {}
-            dataset_dict['SNH']['train']=pd.read_csv('SNH/SNHtrain.csv',usecols=['headline','is_sarcastic']).rename(columns={'headline':'text', 'is_sarcastic':'label'})
-            dataset_dict['SNH']['test']=pd.read_csv('SNH/SNHtest.csv',usecols=['headline','is_sarcastic']).rename(columns={'headline':'text', 'is_sarcastic':'label'})
+            dataset_dict['SNH']['train']=pd.read_csv('SNH/train.csv',usecols=['headline','is_sarcastic']).rename(columns={'headline':'text', 'is_sarcastic':'label'})
+            dataset_dict['SNH']['test']=pd.read_csv('SNH/test.csv',usecols=['headline','is_sarcastic']).rename(columns={'headline':'text', 'is_sarcastic':'label'})
             
             #iSarcasm
             dataset_dict['iSarcasm'] = {}
