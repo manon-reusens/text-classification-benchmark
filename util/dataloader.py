@@ -96,7 +96,7 @@ class DataLoader:
             dataset_dict['agnews']['train'] = pd.read_csv('agnews/train.csv')
             dataset_dict['agnews']['test'] = pd.read_csv('agnews/test.csv')
             #Web Of Science, WOS11967
-            dataset_dict['WOS']=pd.read_csv('WOS/WOStrain.csv',usecols=['input_data','label_level_1']).rename(columns={'input_data':'text', 'label_level_1':'label'})
+            dataset_dict['WOS']=pd.read_csv('WOS/train.csv',usecols=['input_data','label_level_1']).rename(columns={'input_data':'text', 'label_level_1':'label'})
         
         #Sentiment Analysis 1 : Emotion
         os.chdir('../sentiment/emotion')
