@@ -38,14 +38,17 @@ Instructions for datasets collection :
 | LIAR | Fake News | 6 | 12836 | Train-Val-Test |
 | 20News | Topic | 20 | 18846 | Train-Test |
 | AGNews | Topic | 4 | 127600 | Train-Test |
+| Web of Science Dataset | Topic | 7 | 11967 | None |
 | TweetEval Emotion | Emotion | 4 | 5052 | Train-Val-Test |
 | CARER | Emotion | 8 | 20000 | Train-Val-Test |
 | DailyDialog Act - Silicone | Emotion | 7 | 102979 | Train-Val-Test |
 | IMDb | Polarity | 2 | 50000 | Train-Test |
 | Stanford Sentiment Treebank | Polarity | 2 | 68403 |  Train-Val-Test |
+| Movie Review | Polarity | 2 | 10662 | None |
 | SemEval Task 3 | Sarcasm | 2(4) | 4601 | Train-Test |
 | SARC | Sarcasm | 2 | 1409012 | Train-Test |
 |iSarcasm - English | Sarcasm | 2 | 5735 | Train-Test | 
+| Sarcasm News Headlines | Sarcasm | 2 | 55328 | Train-Test |
 
 
 ### Links
@@ -57,10 +60,13 @@ The datasets can be retrieved with the following links.
 * [LIAR](https://huggingface.co/datasets/liar)
 * [20News](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_20newsgroups.html)
 * [AGNews](https://huggingface.co/datasets/ag_news)
+* [Web of Science Dataset] (https://huggingface.co/datasets/web_of_science)
 * [Tweet Eval : Emotion detection](https://github.com/cardiffnlp/tweeteval)
 * [CARER Emotion](https://huggingface.co/datasets/emotion)
 * [Daily Dialog Act Corpus (silicone)](https://huggingface.co/datasets/silicone/viewer/dyda_e/train)
 * [Stanford Sentiment Tree Bank](https://huggingface.co/datasets/sst2)
+* [Movie Review] (https://www.cs.cornell.edu/people/pabo/movie-review-data/rt-polaritydata.tar.gz)
 * [SemEval 2018 Task 3](https://github.com/Cyvhee/SemEval2018-Task3)
 * [SARC](https://nlp.cs.princeton.edu/SARC/1.0/)
 * [SemEval 2022 iSarcasm](https://github.com/iabufarha/iSarcasmEval) 
+* [Sarcasm News Headlines] (https://huggingface.co/datasets/raquiba/Sarcasm_News_Headline/viewer/raquiba--Sarcasm_News_Headline)
