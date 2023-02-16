@@ -42,7 +42,7 @@ dl = DataLoader([dataset_group])
 data = dl.load()
 
 silicone=data[dataset_name]
-train_emo, val_emo, test_emo = data_splitter(data[dataset_name],0,create_val_set=True,seed=SEED)
+train_emo, val_emo, test_emo = data_splitter(data[dataset_name],0,create_val_set=True,test_split = 0.25,val_split = 0.2,seed=SEED)
 emb_dim= 300
 train_label= pd.get_dummies(train_emo.label)
 val_label=pd.get_dummies(val_emo.label)
