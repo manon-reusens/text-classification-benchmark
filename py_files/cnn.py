@@ -124,15 +124,20 @@ class CNN():
 
         predictions=model.predict(y_text)
         pos_class_pred=[pred[1] for pred in predictions ]
-        
+
         predict_classes=np.argmax(predictions, axis=1)
         accuracy= metrics.accuracy_score(y_label,predict_classes)
         f1_score=metrics.f1_score(y_label,predict_classes ,average='macro')
+        precision_macro= metrics.precision_score(y_label,predict_classes,average='macro')
+        recall_macro= metrics.recall_score(y_label,predict_classes,average='macro')
+
         if len(self.train_label.columns) <=2:
             aucpc =  metrics.average_precision_score(y_label,pos_class_pred)
             auc = metrics.roc_auc_score(y_label,pos_class_pred)
         else:
             aucpc = '-'
             auc = '-'
-        return accuracy, f1_score, aucpc, auc
-
+        if mode=='val':
+            return accuracy, f1_score, aucpc, auc, precision_macro, recall_macro
+        if mode=='test':
+            return accuracy, f1_score, aucpc, auc, precision_macro, recall_macro, predict_classes, predictions,y_label, y_text
