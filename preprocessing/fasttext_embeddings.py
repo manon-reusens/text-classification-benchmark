@@ -56,12 +56,12 @@ class FastTextEmbeddings:
         test_seq_nopad  = t.texts_to_sequences(test.text)
 
         #the sentences will be padded to the max length, which is the longest sequence of words
-        max_length= max(len(item) for item in train_seq_nopad)
+        max_length= min(max(len(item) for item in train_seq_nopad),512)
 
 
-        padded_train = pad_sequences(train_seq_nopad, maxlen=max_length, padding='post')
-        padded_val = pad_sequences(val_seq_nopad, maxlen=max_length, padding='post')
-        padded_test = pad_sequences(test_seq_nopad, maxlen=max_length, padding='post')
+        padded_train = pad_sequences(train_seq_nopad, maxlen=max_length,truncating ='post', padding='post')
+        padded_val = pad_sequences(val_seq_nopad, maxlen=max_length, padding='post',truncating ='post')
+        padded_test = pad_sequences(test_seq_nopad, maxlen=max_length,truncating ='post', padding='post')
         
         return padded_train, padded_val,padded_test, word_index, max_length
 
