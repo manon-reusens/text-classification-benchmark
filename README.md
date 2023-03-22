@@ -8,8 +8,6 @@
 * util/dataloader.py :  collect the datasets in their raw format and convert the useful columns to a pandas dataframe
 * util/datasplitter.py : splits a dataset into its train-(val)-test set components
 * data_collection.py :  collect datasets from the web and store them as csv files
-* evaluator.py : fits a model on the train data and evaluates it on the test set
-* run.py : main script, conducts an evaluation of all models accross all tasks
 
 ## Installation
 
@@ -26,7 +24,7 @@ Instructions for datasets collection :
 1. Run 'data_collection.py'. This will download all datasets except FakeNewsNet.
 2. Clone the [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) repository in datasets/fake_news/FakeNewsBet
 3. Follow the data collection instructions in the readme file of FakeNewsNet
-4. Execute 'run.py' to get the trained models and evaluation metrics reported in the paper
+
 
 ## Datasets
 ### Structure of the datasets
@@ -46,7 +44,6 @@ Instructions for datasets collection :
 | Stanford Sentiment Treebank | Polarity | 2 | 68403 |  Train-Val-Test |
 | Movie Review | Polarity | 2 | 10662 | None |
 | SemEval Task 3 | Sarcasm | 2(4) | 4601 | Train-Test |
-| SARC | Sarcasm | 2 | 1409012 | Train-Test |
 |iSarcasm - English | Sarcasm | 2 | 5735 | Train-Test | 
 | Sarcasm News Headlines | Sarcasm | 2 | 55328 | Train-Test |
 
@@ -67,6 +64,5 @@ The datasets can be retrieved with the following links.
 * [Stanford Sentiment Tree Bank](https://huggingface.co/datasets/sst2)
 * [Movie Review](https://www.cs.cornell.edu/people/pabo/movie-review-data/rt-polaritydata.tar.gz)
 * [SemEval 2018 Task 3](https://github.com/Cyvhee/SemEval2018-Task3)
-* [SARC](https://nlp.cs.princeton.edu/SARC/1.0/)
 * [SemEval 2022 iSarcasm](https://github.com/iabufarha/iSarcasmEval) 
 * [Sarcasm News Headlines](https://huggingface.co/datasets/raquiba/Sarcasm_News_Headline/viewer/raquiba--Sarcasm_News_Headline)
