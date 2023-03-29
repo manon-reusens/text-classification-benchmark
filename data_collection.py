@@ -33,8 +33,8 @@ if not os.path.exists('fake_news'):
         os.makedirs('fake_news/liar')
     if not os.path.exists('fake_news/coAID'):
         os.makedirs('fake_news/CoAID')
-    if not os.path.exists('fake_news/FakeNewsNet'):
-        os.makedirs('fake_news/FakeNewsNet')
+    if not os.path.exists('fake_news/Gossipcop'):
+        os.makedirs('fake_news/Gossipcop')
 if not os.path.exists('topic'):
     os.makedirs('topic/agnews')
     os.makedirs('topic/WOS')
