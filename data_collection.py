@@ -89,6 +89,13 @@ ftpstream = urllib.request.urlopen(tar_dataset)
 tar_dataset = tarfile.open(fileobj=ftpstream, mode="r|gz")
 tar_dataset.extractall(path='sentiment/polarity/movie_review')
 
+#Gossipcop
+fake=pd.read_csv('https://raw.githubusercontent.com/KaiDMML/FakeNewsNet/master/dataset/gossipcop_fake.csv')
+real=pd.read_csv('https://raw.githubusercontent.com/KaiDMML/FakeNewsNet/master/dataset/gossipcop_real.csv')
+fake.to_csv('fake_news/Gossipcop/fake.csv',index=False)
+real.to_csv('fake_news/Gossipcop/real.csv',index=False)
+            
+
 #Archives
 #SARC
 #pd.read_csv('https://nlp.cs.princeton.edu/SARC/1.0/main/test-balanced.csv.bz2',sep='\t',compression='bz2',header=None,usecols=[0,1]).rename(columns={0:'label',1:'text'}).to_csv('sentiment/sarcasm/sarc/test-balanced.csv',index=False)
