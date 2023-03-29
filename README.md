@@ -22,7 +22,7 @@ $ pip install -r requirements.txt
 Instructions for datasets collection : 
 
 1. Run 'data_collection.py'. This will download all datasets except FakeNewsNet.
-2. Clone the [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) repository in datasets/fake_news/FakeNewsBet
+2. Clone the [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) repository in datasets/fake_news/FakeNewsNet
 3. Follow the data collection instructions in the readme file of FakeNewsNet
 
 
