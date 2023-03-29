@@ -43,7 +43,7 @@ class DataLoader:
             real_text=real['title']
             fake_text=fake['title']
             gossipcop_label = [1] * len(real) + [0] * len(fake)
-            dataset_dict['gossipcop'] = pd.DataFrame({'text':real_text+fake_text,'label':gossipcop_label}).reset_index(drop=True)
+            dataset_dict['gossipcop'] = pd.DataFrame({'text':real_text.append(fake_text),'label':gossipcop_label}).reset_index(drop=True)
             #if len(os.listdir('FakeNewsNet'))!=0: 
             # The FakeNewsData has been added following the intructions in this repository : https://github.com/KaiDMML/FakeNewsNet 
             #FakeNewsNet Politifact
