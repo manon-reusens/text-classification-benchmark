@@ -2,10 +2,10 @@ import wandb
 import nltk
 
 
-nltk.download('stopwords',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/envs/conda_benchmark/nltk_data')
-nltk.download('omw-1.4',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/envs/conda_benchmark/nltk_data')
-nltk.download('punkt',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/envs/conda_benchmark/nltk_data')
-nltk.download('wordnet',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/envs/conda_benchmark/nltk_data');
+nltk.download('stopwords',quiet=True)
+nltk.download('omw-1.4',quiet=True)
+nltk.download('punkt',quiet=True)
+nltk.download('wordnet',quiet=True);
 
 
 
