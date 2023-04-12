@@ -34,7 +34,7 @@ os.environ["WANDB_SILENT"] = "true"
 SEED=int(sys.argv[1])
 OPT_ITER=7
 
-path= '/lustre1/scratch/344/vsc34470/results/svm/'
+path= 'results/svm/'
 dl = DataLoader(['polarity'])
 data = dl.load()
 
