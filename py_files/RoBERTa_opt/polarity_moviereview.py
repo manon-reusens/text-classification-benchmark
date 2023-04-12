@@ -80,7 +80,7 @@ name = 'polarity_moviereview_roberta' #change here
 sweep_config['name'] =  name
 sweep_id = wandb.sweep(sweep_config, project="roberta")
 
-path= '/lustre1/scratch/344/vsc34470/results/roberta/'+sweep_id
+path= '/results/roberta/'+sweep_id
 
 iterations=6
 
@@ -109,7 +109,7 @@ def train(config=None):
         # If called by wandb.agent, as below,
         # this config will be set by Sweep Controller
         torch.cuda.empty_cache()
-        path= '/lustre1/scratch/344/vsc34470/results/roberta/'+sweep_id+'-model-'+run.name
+        path= '/results/roberta/'+sweep_id+'-model-'+run.name
         config = wandb.config
         roberta=RoBERTa_model(device, config, train_emo, val_emo,test_emo, num_labels, gpu)
         train, val, test = roberta.create_loaders()
