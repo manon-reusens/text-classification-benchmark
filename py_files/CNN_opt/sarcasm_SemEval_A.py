@@ -1,17 +1,18 @@
 import sys
 import os
-os.environ['WANDB_DIR']= '/lustre1/scratch/353/vsc35313/
+
 import wandb
 from wandb.keras import WandbCallback
 import pandas as pd 
 sys.path.append(os.getcwd())
+os.environ['WANDB_DIR']= '/lustre1/scratch/344/vsc34470/wandb/'
 
 #Load linguistic resources 
 from nltk import download
-download('stopwords',quiet=True,download_dir='/data/leuven/353/vsc35313/miniconda3/nltk_data')
-download('omw-1.4',quiet=True,download_dir='/data/leuven/353/vsc35313/miniconda3/nltk_data')
-download('punkt',quiet=True,download_dir='/data/leuven/353/vsc35313/miniconda3/nltk_data')
-download('wordnet',quiet=True,download_dir='/data/leuven/353/vsc35313/miniconda3/nltk_data');
+download('stopwords',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/nltk_data')
+download('omw-1.4',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/nltk_data')
+download('punkt',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/nltk_data')
+download('wordnet',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/nltk_data');
 
 from codecarbon import EmissionsTracker
 from util.dataloader import DataLoader
@@ -32,7 +33,7 @@ from numpy.random import seed
 SEED=int(sys.argv[1])
 tf.random.set_seed(SEED)
 seed(SEED)
-path= '/lustre1/scratch/353/vsc35313/results/CNN/'
+path= '/lustre1/scratch/344/vsc34470/results/CNN/'
 project_name = 'bayes_CNN'
 dataset_group = 'sarcasm'
 dataset_name ='SemEval_A'
@@ -79,12 +80,12 @@ def train(config=None):
         model=tf.keras.models.load_model(path+run.project +'/'+sweep_id+'-model-'+run.name+'.hdf5', compile=False) 
 
         #make predictions
-        accuracy, f1_score, aucpc, auc= cnn.make_predictions(model)
+        accuracy, f1_score, aucpc, auc, prec, recall= cnn.make_predictions(model)
         print('The Accuracy is', accuracy)
         print('The F1 score is', f1_score)
         print('The area under the precision recall curve is', aucpc)
         #log the accuracy etc
-        wandb.log({'SEED':SEED,"best_val_accuracy": accuracy, "best_val_f1 macro":f1_score, "best_val_AUC-PC":aucpc, 'best_val_AUC':auc })
+        wandb.log({'SEED':SEED,"best_val_accuracy": accuracy, "best_val_f1 macro":f1_score, "best_val_AUC-PC":aucpc, 'best_val_AUC':auc,'best_val_precision': prec, 'best_val_recall':recall  })
 
 wandb.agent(sweep_id, function= train, count=iterations)
 
