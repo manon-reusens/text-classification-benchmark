@@ -4,7 +4,7 @@ import wandb
 from wandb.keras import WandbCallback
 import pandas as pd 
 sys.path.append(os.getcwd())
-os.environ['WANDB_DIR']= '/lustre1/scratch/344/vsc34470/wandb'
+os.environ['WANDB_DIR']= 'wandb'
 from codecarbon import EmissionsTracker
 from util.dataloader import DataLoader
 from util.datasplitter import data_splitter
