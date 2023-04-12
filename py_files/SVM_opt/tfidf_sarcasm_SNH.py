@@ -7,7 +7,7 @@ nltk.download('wordnet',quiet=True);
 import os
 import sys
 sys.path.append(os.getcwd())
-os.environ['WANDB_DIR']= '/lustre1/scratch/344/vsc34470/wandb'
+os.environ['WANDB_DIR']= 'wandb'
 import pickle
 import warnings
 import io
