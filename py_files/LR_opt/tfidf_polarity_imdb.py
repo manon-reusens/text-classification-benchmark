@@ -11,10 +11,10 @@ import numpy as np
 import pandas as pd
 from codecarbon import EmissionsTracker
 
-nltk.download('stopwords',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/envs/conda_benchmark/nltk_data')
-nltk.download('omw-1.4',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/envs/conda_benchmark/nltk_data')
-nltk.download('punkt',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/envs/conda_benchmark/nltk_data')
-nltk.download('wordnet',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/envs/conda_benchmark/nltk_data');
+download('stopwords',quiet=True)
+download('omw-1.4',quiet=True)
+download('punkt',quiet=True)
+download('wordnet',quiet=True)
 
 import yaml
 from util.dataloader import DataLoader
