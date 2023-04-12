@@ -38,7 +38,7 @@ import yaml
 SEED=int(sys.argv[1])
 OPT_ITER=7
 
-path= 'results/lr/'
+path= 'results/logistic_regression/'
 dl = DataLoader(['fake_news'])
 data = dl.load()
 
