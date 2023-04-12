@@ -30,7 +30,7 @@ import yaml
 SEED=int(sys.argv[1])
 OPT_ITER=7
 
-path= '/scratch/leuven/344/vsc34470/results/svm/'
+path= 'results/svm/'
 dl = DataLoader(['emotion'])
 data = dl.load()
 
