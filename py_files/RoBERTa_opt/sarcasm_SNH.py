@@ -1,7 +1,7 @@
 import sys
 import os
 import wandb
-os.environ['WANDB_DIR']= '/lustre1/scratch/344/vsc34470/wandb'
+os.environ['WANDB_DIR']= 'wandb'
 import pandas as pd 
 import torch
 import random
