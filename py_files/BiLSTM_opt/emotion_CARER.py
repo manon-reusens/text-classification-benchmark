@@ -22,10 +22,10 @@ from numpy.random import seed
 
 
 #Load linguistic resources 
-download('stopwords',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/nltk_data')
-download('omw-1.4',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/nltk_data')
-download('punkt',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/nltk_data')
-download('wordnet',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/nltk_data');
+download('stopwords',quiet=True)
+download('omw-1.4',quiet=True)
+download('punkt',quiet=True)
+download('wordnet',quiet=True)
 
 SEED=int(sys.argv[1])
 tf.random.set_seed(SEED)
