@@ -3,7 +3,7 @@ import os
 import wandb
 from wandb.keras import WandbCallback
 
-os.environ['WANDB_DIR']= '/lustre1/scratch/344/vsc34470/wandb'
+os.environ['WANDB_DIR']= 'wandb'
 import pandas as pd 
 sys.path.append(os.getcwd())
 from nltk import download
