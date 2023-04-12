@@ -33,7 +33,7 @@ from numpy.random import seed
 SEED=int(sys.argv[1])
 tf.random.set_seed(SEED)
 seed(SEED)
-path= '/lustre1/scratch/344/vsc34470/results/CNN/'
+path= 'results/CNN/'
 project_name = 'bayes_CNN'
 dataset_group = 'topic'
 dataset_name ='agnews'
