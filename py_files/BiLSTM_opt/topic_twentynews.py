@@ -31,7 +31,7 @@ download('wordnet',quiet=True,download_dir='/data/leuven/344/vsc34470/text-class
 SEED=int(sys.argv[1])
 tf.random.set_seed(SEED)
 seed(SEED)
-path= '/lustre1/scratch/344/vsc34470/results/bilstm/'
+path= 'results/bilstm/'
 
 dl = DataLoader(['topic'])
 data = dl.load()
