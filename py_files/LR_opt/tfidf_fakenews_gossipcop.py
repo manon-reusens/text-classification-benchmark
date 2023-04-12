@@ -1,9 +1,9 @@
 import wandb
 import nltk
-download('stopwords',quiet=True)
-download('omw-1.4',quiet=True)
-download('punkt',quiet=True)
-download('wordnet',quiet=True)
+nltk.download('stopwords',quiet=True)
+nltk.download('omw-1.4',quiet=True)
+nltk.download('punkt',quiet=True)
+nltk.download('wordnet',quiet=True);
 
 
 import os
