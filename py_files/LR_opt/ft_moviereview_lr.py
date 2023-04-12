@@ -37,7 +37,7 @@ import yaml
 SEED=int(sys.argv[1])
 OPT_ITER=7
 
-path =  '/lustre1/scratch/344/vsc34470/results/lr/'
+path =  'results/logistic_regression/'
 dl = DataLoader(['polarity'])
 data = dl.load()
 
