@@ -30,7 +30,7 @@ download('wordnet',quiet=True,download_dir='/data/leuven/344/vsc34470/text-class
 SEED=int(sys.argv[1])
 tf.random.set_seed(SEED)
 seed(SEED)
-path= '/lustre1/scratch/344/vsc34470/results/bilstm/'
+path= 'PATH'
 
 dl = DataLoader(['fake_news'])
 data = dl.load()
