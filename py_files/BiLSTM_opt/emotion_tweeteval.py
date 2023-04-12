@@ -30,7 +30,7 @@ download('wordnet',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3
 SEED=int(sys.argv[1])
 tf.random.set_seed(SEED)
 seed(SEED)
-path= 'PATH'
+path= 'results/bilstm/'
 
 dl = DataLoader(['emotion'])
 data = dl.load()
