@@ -62,7 +62,7 @@ torch.manual_seed(seed_val)
 if gpu==True:
     torch.cuda.manual_seed_all(seed_val)
 
-path= '/lustre1/scratch/344/vsc34470/results/roberta/'
+path= '/results/roberta/'
 
 dl = DataLoader(['sarcasm'])
 data = dl.load()
@@ -109,7 +109,7 @@ def train(config=None):
         # If called by wandb.agent, as below,
         # this config will be set by Sweep Controller
         torch.cuda.empty_cache()
-        path= '/lustre1/scratch/344/vsc34470/results/roberta/'+sweep_id+'-model-'+run.name
+        path= '/results/roberta/'+sweep_id+'-model-'+run.name
         config = wandb.config
         roberta=RoBERTa_model(device, config, train_emo, val_emo,test_emo, num_labels, gpu)
         train, val, test = roberta.create_loaders()
