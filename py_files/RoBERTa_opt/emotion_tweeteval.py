@@ -8,7 +8,7 @@ import random
 import numpy as np
 import time
 sys.path.append(os.getcwd())
-os.environ['WANDB_DIR']= '/lustre1/scratch/344/vsc34470/wandb'
+os.environ['WANDB_DIR']= 'wandb'
 import wandb
 import pandas as pd 
 from nltk import download
