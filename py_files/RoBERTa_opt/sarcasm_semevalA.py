@@ -13,10 +13,10 @@ sys.path.append(os.getcwd())
 import wandb
 import pandas as pd 
 from nltk import download
-download('stopwords',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/envs/roberta/nltk_data')
-download('omw-1.4',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/envs/roberta/nltk_data')
-download('punkt',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/envs/roberta/nltk_data')
-download('wordnet',quiet=True,download_dir='/data/leuven/344/vsc34470/miniconda3/envs/roberta/nltk_data');
+download('stopwords',quiet=True)
+download('omw-1.4',quiet=True)
+download('punkt',quiet=True)
+download('wordnet',quiet=True);
 
 from codecarbon import EmissionsTracker
 from util.dataloader import DataLoader
