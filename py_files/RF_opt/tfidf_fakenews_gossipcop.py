@@ -33,7 +33,7 @@ import yaml
 SEED=int(sys.argv[1])
 OPT_ITER=30
 
-path= '/lustre1/scratch/344/vsc34470/results/rf/'
+path= '/results/rf/'
 dl = DataLoader(['fake_news'])
 data = dl.load()
 
