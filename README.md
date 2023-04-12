@@ -31,8 +31,8 @@ Instructions for datasets collection :
 
 | Dataset | Task |  Classes  | Size |  Split |
 | --- | --- |  --- | --- | --- |
-| FakeNewsNet - GossipCop | Fake News |2 | 18590 | None (80% Train - 20% Test in paper) | 
-| CoAID | Fake News | 2 |  3669     | None (75% Train - 25% Test in paper) |
+| FakeNewsNet - GossipCop | Fake News |2 | 22140 | None (80% Train - 20% Test in paper) | 
+| CoAID | Fake News | 2 |  2162     | None (75% Train - 25% Test in paper) |
 | LIAR | Fake News | 6 | 12836 | Train-Val-Test |
 | 20News | Topic | 20 | 18846 | Train-Test |
 | AGNews | Topic | 4 | 127600 | Train-Test |
@@ -41,10 +41,10 @@ Instructions for datasets collection :
 | CARER | Emotion | 8 | 20000 | Train-Val-Test |
 | DailyDialog Act - Silicone | Emotion | 7 | 102979 | Train-Val-Test |
 | IMDb | Polarity | 2 | 50000 | Train-Test |
-| Stanford Sentiment Treebank | Polarity | 2 | 68403 |  Train-Val-Test |
+| Stanford Sentiment Treebank | Polarity | 2 | 68221 |  Train-Val-Test |
 | Movie Review | Polarity | 2 | 10662 | None |
 | SemEval Task 3 | Sarcasm | 2(4) | 4601 | Train-Test |
-|iSarcasm - English | Sarcasm | 2 | 5735 | Train-Test | 
+|iSarcasm - English | Sarcasm | 2 | 4868 | Train-Test | 
 | Sarcasm News Headlines | Sarcasm | 2 | 55328 | Train-Test |
 
 
