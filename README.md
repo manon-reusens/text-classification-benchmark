@@ -25,7 +25,8 @@ Instructions for datasets collection :
 
 Instructions for running py-files :
 
-1. run the py-file in the command line including a random seed. For our experiments we used random seeds [33:42]
+1. Run the py-file in the command line including a random seed. 
+   For our experiments we used random seeds [33:42]
 
 
 ## Datasets
