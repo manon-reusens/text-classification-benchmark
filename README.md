@@ -21,9 +21,11 @@ $ pip install -r requirements.txt
 ## How to use
 Instructions for datasets collection : 
 
-1. Run 'data_collection.py'. This will download all datasets except FakeNewsNet.
-2. Clone the [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) repository in datasets/fake_news/FakeNewsNet
-3. Follow the data collection instructions in the readme file of FakeNewsNet
+1. Run 'data_collection.py'. This will download all datasets.
+
+Instructions for running py-files :
+
+1. run the py-file in the command line including a random seed. For our experiments we used random seeds [33:42]
 
 
 ## Datasets
