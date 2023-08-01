@@ -39,6 +39,8 @@ class CNN():
 
 
     def build_network(self, word_index, emb_dim, emb_matrix, max_len):
+        if max_len<32:
+            max_len=32 #minmimum length required for the CNN to work
         embedding_layer = Embedding(len(word_index) + 1, emb_dim, weights=[emb_matrix], input_length=max_len, trainable=False)
 
         #embedding_layer= Embedding(self.vocab_size, output_dim=self.config['embedding_layer_size'], mask_zero=True, input_length=self.padded_length)
