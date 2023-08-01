@@ -41,12 +41,19 @@ class CNN():
     def build_network(self, word_index, emb_dim, emb_matrix, max_len):
         if max_len<32:
             max_len=32 #minmimum length required for the CNN to work
-        embedding_layer = Embedding(len(word_index) + 1, emb_dim, weights=[emb_matrix], input_length=max_len, trainable=False)
+            embedding_layer = Embedding(len(word_index) + 1, emb_dim, weights=[emb_matrix], input_length=max_len, trainable=False)
+            model=Sequential()
+            model.add(embedding_layer)
+            model.add(Conv1D(filters=self.config.filters,kernel_size=3,activation='relu',padding='same',strides=1))
+        else:
+            
+            embedding_layer = Embedding(len(word_index) + 1, emb_dim, weights=[emb_matrix], input_length=max_len, trainable=False)
 
-        #embedding_layer= Embedding(self.vocab_size, output_dim=self.config['embedding_layer_size'], mask_zero=True, input_length=self.padded_length)
-        model=Sequential()
-        model.add(embedding_layer)
-        model.add(Conv1D(filters=self.config.filters,kernel_size=3,activation='relu',padding='valid',strides=1))
+            #embedding_layer= Embedding(self.vocab_size, output_dim=self.config['embedding_layer_size'], mask_zero=True, input_length=self.padded_length)
+            model=Sequential()
+            model.add(embedding_layer)
+            model.add(Conv1D(filters=self.config.filters,kernel_size=3,activation='relu',padding='valid',strides=1))if max_len<32:
+
         model.add(MaxPooling1D(pool_size=2))
         model.add(Conv1D(filters=self.config.filters,kernel_size=4,activation='relu',padding='valid',strides=1))
         model.add(MaxPooling1D(pool_size=2))
