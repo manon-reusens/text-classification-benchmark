@@ -44,22 +44,14 @@ class DataLoader:
             fake_text=fake['title']
             gossipcop_label = [1] * len(real) + [0] * len(fake)
             dataset_dict['gossipcop'] = pd.DataFrame({'text':real_text.append(fake_text),'label':gossipcop_label}).reset_index(drop=True)
-            #if len(os.listdir('FakeNewsNet'))!=0: 
-            # The FakeNewsData has been added following the intructions in this repository : https://github.com/KaiDMML/FakeNewsNet 
-            #FakeNewsNet Politifact
-                # real_path = "FakeNewsNet/code/fakenewsnet_dataset/politifact/real/"
-                # fake_path = "FakeNewsNet/code/fakenewsnet_dataset/politifact/fake/"
-                # real_text = self.retrieve_text_path(real_path)
-                # fake_text = self.retrieve_text_path(fake_path)    
-                # politifact_label = [1] * len(real_text) + [0] * len(fake_text)        
-                # dataset_dict['politifact'] = pd.DataFrame({'text':real_text+fake_text,'label':politifact_label}).reset_index(drop=True)
-                #FakeNewsNet GossipCop
-                #real_path = "FakeNewsNet/code/fakenewsnet_dataset/gossipcop/real/"
-                #fake_path = "FakeNewsNet/code/fakenewsnet_dataset/gossipcop/fake/"
-                #real_text = self.retrieve_text_path(real_path)
-                #fake_text = self.retrieve_text_path(fake_path)    
-                #gossipcop_label = [1] * len(real_text) + [0] * len(fake_text)        
-                #dataset_dict['gossipcop'] = pd.DataFrame({'text':real_text+fake_text,'label':gossipcop_label}).reset_index(drop=True)
+            
+            real=pd.read_csv('Politifact/real.csv')
+            fake=pd.read_csv('Politifact/fake.csv')
+            real_text=real['title']
+            fake_text=fake['title']
+            politifact_label = [1] * len(real) + [0] * len(fake)
+            dataset_dict['politifact'] = pd.DataFrame({'text':real_text.append(fake_text),'label':politifact_label}).reset_index(drop=True)
+            
             #CoAID
             real = pd.read_csv('CoAID/Real.csv')
             fake = pd.read_csv('CoAID/Fake.csv')
@@ -79,6 +71,18 @@ class DataLoader:
                          usecols=['label','statement']).rename(columns={'statement':'text'})
             dataset_dict['liar']['test'] = pd.read_csv('liar/test.csv',
                          usecols=['label','statement']).rename(columns={'statement':'text'})
+            
+            #McIntire
+            df_mcint=pd.read_csv('McIntire/fake_or_real_news.csv',usecols=['title','label']).rename(columns={'title':'text', 'label':'label'})
+            df_mcint['label'].replace('REAL',1, inplace=True)
+            df_mcint['label'].replace('FAKE',0, inplace=True)
+            df_extra=pd.read_csv('McIntire/fake_or_real_news.csv')
+            df_extra=df_extra[df_extra['title'].isna()]
+            value_to_impute=df_extra['text'].iloc[0]
+            df_mcint=df_mcint.fillna(value_to_impute)#one null value that we filled with the text column
+            dataset_dict['Mcintire']={}
+            dataset_dict['McIntire']=df_mcint.dropna()
+
             
         #Topic Classification
         os.chdir('../topic')
@@ -103,6 +107,18 @@ class DataLoader:
             dataset_dict['agnews']['test'] = pd.read_csv('agnews/test.csv')
             #Web Of Science, WOS11967
             dataset_dict['WOS']=pd.read_csv('WOS/train.csv',usecols=['input_data','label_level_1']).rename(columns={'input_data':'text', 'label_level_1':'label'})
+            
+            #Yahoo
+            col_dict = {'topic':'label','question_title':'title','question_content':'question'}
+            dataset_dict['yahoo']['train'] = pd.read_csv('yahoo/train.csv').rename(columns=col_dict).fillna(' ')
+            dataset_dict['yahoo']['train']['text'] = dataset_dict['yahoo']['train']['title'].apply(str) + ' ' + dataset_dict['yahoo']['train']['question'].apply(str)
+            dataset_dict['yahoo']['test'] = pd.read_csv('yahoo/test.csv').rename(columns=col_dict).fillna(' ')
+            dataset_dict['yahoo']['test']['text'] = dataset_dict['yahoo']['test']['title'].apply(str) + ' ' + dataset_dict['yahoo']['test']['question'].apply(str)
+            
+            #bbc news
+            dataset_dict['bbc'] = {}
+            dataset_dict['bbc']['train'] = pd.read_csv('bbc/train.csv')
+            dataset_dict['bbc']['test'] = pd.read_csv('bbc/test.csv')
         
         #Sentiment Analysis 1 : Emotion
         os.chdir('../sentiment/emotion')
@@ -131,7 +147,20 @@ class DataLoader:
                              usecols=['Utterance','Label']).rename(columns={'Utterance':'text','Label':'label'})
             dataset_dict['silicone']['test'] = pd.read_csv('silicone/test.csv',
                              usecols=['Utterance','Label']).rename(columns={'Utterance':'text','Label':'label'})
-
+            #MELD
+            dataset_dict['MELD']={}
+            dataset_dict['MELD']['train']=pd.read_csv('MELD/train.csv',usecols=['Emotion','Utterance']).rename(columns={'Utterance':'text','Emotion':'label'})
+            dataset_dict['MELD']['val']=pd.read_csv('MELD/dev.csv',usecols=['Emotion','Utterance']).rename(columns={'Utterance':'text','Emotion':'label'})    
+            dataset_dict['MELD']['test']=pd.read_csv('MELD/test.csv',usecols=['Emotion','Utterance']).rename(columns={'Utterance':'text','Emotion':'label'})
+            for i in ['train', 'val','test']:
+                dataset_dict['MELD'][i]['label'].replace('surprise',0, inplace=True)
+                dataset_dict['MELD'][i]['label'].replace('anger',1, inplace=True)
+                dataset_dict['MELD'][i]['label'].replace('neutral',2, inplace=True)
+                dataset_dict['MELD'][i]['label'].replace('joy',3, inplace=True)
+                dataset_dict['MELD'][i]['label'].replace('sadness',4, inplace=True)
+                dataset_dict['MELD'][i]['label'].replace('fear',5, inplace=True)
+                dataset_dict['MELD'][i]['label'].replace('disgust',6, inplace=True)
+        
         # Sentiment Analysis 2: Polarity  
         os.chdir('../polarity')
         if 'polarity' in self.subset:
@@ -154,6 +183,17 @@ class DataLoader:
             dataset_dict['sst2']['train'] = pd.read_csv('sst2/train.csv',usecols=['sentence','label']).rename(columns={'sentence':'text'})
             dataset_dict['sst2']['test'] = pd.read_csv('sst2/val.csv',usecols=['sentence','label']).rename(columns={'sentence':'text'}) #we will use the development set as test set
             #dataset_dict['sst2']['test'] = pd.read_csv('sst2/test.csv',usecols=['sentence','label']).rename(columns={'sentence':'text'})
+
+            #CR
+            dataset_dict['CR']={}
+            dataset_dict['CR']['train']=pd.read_csv('CR/train.csv',usecols=['text','label'])
+            dataset_dict['CR']['test']=pd.read_csv('CR/test.csv',usecols=['text','label'])
+
+            #STS-gold
+            dataset_dict['STS-Gold']={}
+            dataset_dict['STS-Gold']=pd.read_csv('STS-Gold/sts_gold_tweet.csv',usecols=['tweet','polarity']).rename(columns={'polarity':'label','tweet':'text'})
+            dataset_dict['STS-Gold']['label'].replace(4,1,inplace=True)
+
 
         #Sentiment Analysis 3: Sarcasm
         os.chdir('../sarcasm')
@@ -187,6 +227,25 @@ class DataLoader:
                                                              usecols=['tweet','sarcastic']).rename(columns={'tweet':'text','sarcastic':'label'})
             dataset_dict['iSarcasm']['train']['text']= dataset_dict['iSarcasm']['train']['text'].apply(str)
             dataset_dict['iSarcasm']['test'] = pd.read_csv('iSarcasm/task_A_En_test.csv').rename(columns={'sarcastic':'label'})
+
+            #Generic_sarcasm
+            dataset_dict['Gen_sarc2']={}
+            dataset_dict['Gen_sarc2']=pd.read_csv('sarcasm_v2/GEN-sarc-notsarc.csv',usecols=['class','text']).rename(columns={'class':'label'})
+            dataset_dict['Gen_sarc2']['label'].replace('notsarc',0,inplace=True)
+            dataset_dict['Gen_sarc2']['label'].replace('sarc',1,inplace=True)
+
+            #Hyperbole_sarcasm
+            dataset_dict['Hyp_sarc2']={}
+            dataset_dict['Hyp_sarc2']=pd.read_csv('sarcasm_v2/HYP-sarc-notsarc.csv',usecols=['class','text']).rename(columns={'class':'label'})
+            dataset_dict['Hyp_sarc2']['label'].replace('notsarc',0,inplace=True)
+            dataset_dict['Hyp_sarc2']['label'].replace('sarc',1,inplace=True)
+
+            #Rhetorical_sarcasm
+            dataset_dict['RQ_sarc2']={}
+            dataset_dict['RQ_sarc2']=pd.read_csv('sarcasm_v2/RQ-sarc-notsarc.csv',usecols=['class','text']).rename(columns={'class':'label'})
+            dataset_dict['RQ_sarc2']['label'].replace('notsarc',0,inplace=True)
+            dataset_dict['RQ_sarc2']['label'].replace('sarc',1,inplace=True)
+            
 
         #Return to home directory
         os.chdir('../../..') 
