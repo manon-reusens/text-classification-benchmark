@@ -1,0 +1,14 @@
+method: bayes   #Available options : [grid, random, bayes]
+entity: benchmark-nlp 
+project: hyperopt
+metric:
+    name: avg_f1macro
+    goal: maximize
+
+parameters: 
+    batch_size:
+        values:  [16,32]
+    learning_rate:
+        values: [1e-5, 2e-5, 3e-5]
+    epochs:
+        value: 10
