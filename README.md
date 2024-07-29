@@ -39,13 +39,13 @@ Instructions for running py-files :
 | LIAR | Fake News | 6 | 12836 | Train-Val-Test |
 | 20News | Topic | 20 | 18846 | Train-Test |
 | AGNews | Topic | 4 | 127600 | Train-Test |
-| Web of Science Dataset | Topic | 7 | 11967 | None |
+| Web of Science Dataset | Topic | 7 | 11967 | None (80% Train - 20% Test in paper) |
 | TweetEval Emotion | Emotion | 4 | 5052 | Train-Val-Test |
 | CARER | Emotion | 8 | 20000 | Train-Val-Test |
 | DailyDialog Act - Silicone | Emotion | 7 | 102979 | Train-Val-Test |
 | IMDb | Polarity | 2 | 50000 | Train-Test |
 | Stanford Sentiment Treebank | Polarity | 2 | 68221 |  Train-Val-Test |
-| Movie Review | Polarity | 2 | 10662 | None |
+| Movie Review | Polarity | 2 | 10662 | None (80% Train - 20% Test in paper) |
 | SemEval Task 3 | Sarcasm | 2(4) | 4601 | Train-Test |
 |iSarcasm - English | Sarcasm | 2 | 4868 | Train-Test | 
 | Sarcasm News Headlines | Sarcasm | 2 | 55328 | Train-Test |
